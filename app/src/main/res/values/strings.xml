@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">悦书小说</string>
+    <string name="sigin_text">YueDuNovel</string>
+    <string name="setting">YueDuNovel</string>
+    <string name="bookshelf_manager">YueDuNovel</string>
+
+
+    <string name="i_am_agree">我已阅读并接受</string>
+    <string name="service_protocol">《阅文用户服务协议》</string>
+    <string name="and">及</string>
+    <string name="privacy_agreement">《隐私协议》</string>
+
+    <string name="forget_password">忘记密码?</string>
+    <string name="register_account">注册新账号</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="book_shelf">书架</string>
+    <string name="book_store">书库</string>
+    <string name="mine">我的</string>
+
+
+    <string name="reading_record">阅读记录</string>
+    <string name="bookshelf">书架</string>
+
+    <string name="click_login">点击登录</string>
+
+</resources>
