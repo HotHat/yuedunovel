@@ -44,7 +44,7 @@
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 
-           <ListView
+           <com.lyhux.yuedunovel.cv.NestedListView
                android:id="@+id/setting_list"
                android:layout_width="match_parent"
                android:layout_height="wrap_content" />
