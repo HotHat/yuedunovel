@@ -1,11 +1,11 @@
 package com.lyhux.yuedunovel.data
 
-open class UserBean {
+data class UserBean (
 
-    var name: String = ""
-    var icon: String = ""
-    var brief: String = ""
-    var token: String = ""
+    var name: String = "",
+    var icon: String = "",
+    var brief: String = "",
+    var token: String = "",
     var nickname: String = ""
 
-}
+)

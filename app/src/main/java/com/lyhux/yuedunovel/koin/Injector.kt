@@ -1,6 +1,7 @@
 package com.lyhux.yuedunovel.koin
 
 import com.lyhux.yuedunovel.api.BookApi
+import com.lyhux.yuedunovel.api.MockBookApi
 import com.lyhux.yuedunovel.data.http.KcHttp
 import com.lyhux.yuedunovel.ui.login.LoginViewModel
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,8 @@ object Injector {
     internal val serviceModule: Module = module {
         //BookApi单例注入
         single {
-            KcHttp.createApi<BookApi>(BookApi.BASE_URL)
+            // KcHttp.createApi<BookApi>(BookApi.BASE_URL)
+            MockBookApi() as BookApi
         }
 
     }

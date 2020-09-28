@@ -1,6 +1,7 @@
 package com.lyhux.yuedunovel.ui.account
 
 import android.content.Context
+import android.content.Intent
 import android.database.DataSetObserver
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.ui.login.LoginActivity
+import kotlin.math.log
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -62,6 +65,13 @@ class AccountFragment : Fragment() {
         )
 
         listView.adapter = MyListAdapter(this.requireActivity(), items)
+
+        val loginView = view.findViewById<TextView>(R.id.login_view)
+        loginView.setOnClickListener {
+            val intent = Intent(activity, LoginActivity::class.java)
+
+            startActivity(intent)
+        }
 
         return view;
     }
