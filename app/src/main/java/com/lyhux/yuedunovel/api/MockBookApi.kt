@@ -10,18 +10,32 @@ import kotlinx.coroutines.async
 import retrofit2.Call
 
 class MockBookApi : BookApi {
-    override fun t1(id: Int): Call<ApiResponse<JsonObject?>>? {
-        TODO("Not yet implemented")
-    }
-
-    override fun t2(id: Int): Call<ApiResponse<List<BookBean>?>>? {
-        TODO("Not yet implemented")
-    }
 
     override fun loginAsync(name: String, password: String): Deferred<ApiResponse<UserBean>> {
         return GlobalScope.async {
             // You have to wrap manually your result before return
             ApiResponse<UserBean>(1, "操作成功", UserBean("hello", "icon", "ttt"))
+        }
+    }
+
+    override fun categoryAsync(id: String, page: Int): Deferred<ApiResponse<List<BookBean>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun bookDetailAsync(id: String): Deferred<ApiResponse<BookBean>> {
+        return GlobalScope.async {
+            ApiResponse<BookBean>(1,
+                    "操作成功",
+                    BookBean(
+                            "hello",
+                            "icon",
+                            "ttt",
+                            arrayListOf()
+
+
+
+                    )
+            )
         }
     }
 

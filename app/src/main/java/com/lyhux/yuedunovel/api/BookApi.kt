@@ -14,26 +14,26 @@ interface BookApi {
         const val BASE_URL = "http://192.168.33.10"
     }
 
-    @GET("/api/t1/{id}")
-    fun t1(@Path("id") id: Int): Call<ApiResponse<JsonObject?>>?
+    @GET("/api/book/category/{id}/{page}")
+    fun categoryAsync(
+        @Path("id") id: String,
+        @Path("page") page: Int
+    ): Deferred<ApiResponse<List<BookBean>>>
 
-    @GET("/api/t2/{id}")
-    fun t2(@Path("id") id: Int): Call<ApiResponse<List<BookBean>?>>?
+    @GET("/api/book/detail/{id}")
+    fun bookDetailAsync(@Path("id") id: String): Deferred<ApiResponse<BookBean>>
 
-    @POST("/api/login")
-    @FormUrlEncoded
-    fun loginAsync(
-        @Field("name") name: String,
-        @Field("password") password: String
-    ): Deferred<ApiResponse<UserBean>>
+
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("/api/json")
     fun jsonAsync(@Body params: LoginParams ): Deferred<ApiResponse<UserBean>>
 
-    // @GET("/api/login")
-    // fun loginAsync(
-    //         @Query("name") name: String,
-    //         @Query("password") password: String
-    // ): Deferred<ApiResponse<UserBean>>
+
+    @POST("/api/login")
+    @FormUrlEncoded
+    fun loginAsync(
+            @Field("name") name: String,
+            @Field("password") password: String
+    ): Deferred<ApiResponse<UserBean>>
 }
