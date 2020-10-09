@@ -29,11 +29,7 @@ class MockBookApi : BookApi {
                     BookBean(
                             "hello",
                             "icon",
-                            "ttt",
-                            arrayListOf()
-
-
-
+                            "ttt"
                     )
             )
         }

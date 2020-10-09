@@ -1,9 +1,12 @@
 package com.lyhux.yuedunovel.data.db
 
+import android.annotation.SuppressLint
 import androidx.room.TypeConverter
-import com.blankj.utilcode.util.ArrayUtils.toObject
 import com.blankj.utilcode.util.GsonUtils
-import com.lyhux.yuedunovel.data.BookBean
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author Zsc
@@ -30,4 +33,14 @@ class Converters {
     // fun ratingBeanString(value: BookBean.RatingBean?): String? {
     //     return GsonUtils.toJson(value)
     // }
+
+    @TypeConverter
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
+    }
+
+    @TypeConverter
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time
+    }
 }

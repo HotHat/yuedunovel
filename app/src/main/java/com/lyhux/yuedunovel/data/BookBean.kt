@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "book")
 data class BookBean(
-        @PrimaryKey(autoGenerate = true) var id: String,
+        @PrimaryKey var id: String,
         @ColumnInfo(name = "name") var name: String,
-        @ColumnInfo(name = "author") var author: String,
-        var chapterList: ArrayList<ChapterBean>
+        @ColumnInfo(name = "author") var author: String
+        // private var chapterList: ArrayList<ChapterBean>
 )

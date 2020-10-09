@@ -2,6 +2,7 @@ package com.lyhux.yuedunovel.koin
 
 import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.api.MockBookApi
+import com.lyhux.yuedunovel.data.db.AppDatabase
 import com.lyhux.yuedunovel.data.http.KcHttp
 import com.lyhux.yuedunovel.ui.login.LoginViewModel
 import org.koin.android.ext.koin.androidContext
@@ -16,6 +17,21 @@ object Injector {
         single {
             // KcHttp.createApi<BookApi>(BookApi.BASE_URL)
             MockBookApi() as BookApi
+        }
+        //AppDatabase注入
+        single {
+            AppDatabase.getInstance(androidContext())
+        }
+
+        single {
+            get<AppDatabase>().bookShelfDao()
+        }
+
+        single {
+            get<AppDatabase>().bookRecordDao()
+        }
+        single {
+            get<AppDatabase>().bookDao()
         }
 
     }

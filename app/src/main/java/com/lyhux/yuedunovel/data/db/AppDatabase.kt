@@ -7,11 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.lyhux.yuedunovel.data.BookBean
 import com.lyhux.yuedunovel.data.BookRecordBean
+import com.lyhux.yuedunovel.data.BookshelfBean
 
 @Database(
     entities = [
         // BookType::class,
         BookRecordBean::class,
+        BookshelfBean::class,
         BookBean::class
     ],
     version = 1,
@@ -23,10 +25,11 @@ abstract class AppDatabase : RoomDatabase() {
     // abstract fun bookTypeDao(): BookTypeDao
     abstract fun bookRecordDao(): BookRecordDao
     abstract fun bookDao(): BookDao
+    abstract fun bookShelfDao(): BookshelfDao
 
     companion object {
 
-        private const val dbName = "weyue-db"
+        private const val dbName = "yuedu-db"
 
         // For Singleton instantiation
         @Volatile
