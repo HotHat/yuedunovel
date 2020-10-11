@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.lyhux.yuedunovel.R
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var bookId: TextView
     private lateinit var bookTitle: TextView
     private lateinit var bookCover: TextView
+    private lateinit var switch: Switch
     private lateinit var btn: Button
 
     private  val bookshelfDao: BookshelfDao by inject()
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         bookId = findViewById(R.id.book_id)
         bookTitle = findViewById(R.id.book_title)
         bookCover = findViewById(R.id.book_cover)
+        switch = findViewById(R.id.act_main_switch)
         btn = findViewById(R.id.button)
 
 
@@ -50,14 +53,17 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             bean.bookId = id
 
             // TODO: change to viewmodel
-            GlobalScope.launch {
-                BookshelfRepository.insert(BookshelfBean().apply {
-                    bookId = id
-                    bookCover = cover
-                    bookTitle = title
-                    bookTime = date
-                })
+            if (switch.isChecked) {
+                GlobalScope.launch {
+                    BookshelfRepository.insert(BookshelfBean().apply {
+                        bookId = id
+                        bookCover = cover
+                        bookTitle = title
+                        bookTime = date
+                    })
+                }
             }
+
             // bookshelfDao.insert(BookshelfBean().apply {
             //     bookId = id
             //     bookCover = cover

@@ -1,9 +1,6 @@
 package com.lyhux.yuedunovel.data.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.lyhux.yuedunovel.data.BookshelfBean
 
 @Dao
@@ -12,7 +9,7 @@ interface BookshelfDao {
     // @Query("UPDATE bookshelf set ")
     // fun update(now: String)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(record: BookshelfBean)
 
     @Query("Select * from bookshelf order by created_at desc")
