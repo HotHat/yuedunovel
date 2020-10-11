@@ -15,7 +15,7 @@ interface BookshelfDao {
     @Insert
     fun insert(record: BookshelfBean)
 
-    @Query("Select * from bookshelf")
+    @Query("Select * from bookshelf order by created_at desc")
     fun findAll() : List<BookshelfBean>
 
     @Delete

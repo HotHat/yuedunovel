@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BookshelfBean
 import com.lyhux.yuedunovel.data.db.BookshelfDao
+import com.lyhux.yuedunovel.data.repository.BookshelfRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import java.util.*
@@ -47,23 +50,40 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             bean.bookId = id
 
             // TODO: change to viewmodel
-            bookshelfDao.insert(BookshelfBean().apply {
-                bookId = id
-                bookCover = cover
-                bookTitle = title
-                bookTime = date
-            })
+            GlobalScope.launch {
+                BookshelfRepository.insert(BookshelfBean().apply {
+                    bookId = id
+                    bookCover = cover
+                    bookTitle = title
+                    bookTime = date
+                })
+            }
+            // bookshelfDao.insert(BookshelfBean().apply {
+            //     bookId = id
+            //     bookCover = cover
+            //     bookTitle = title
+            //     bookTime = date
+            // })
 
 
-            Log.e(TAG, "All in database")
-
-            // TODO: change to viewmodel
-            val allRecord = bookshelfDao.findAll()
-            for (r in allRecord) {
-                Log.e(TAG, r.bookId)
-                Log.e(TAG, r.bookTitle)
-                Log.e(TAG, r.bookCover)
-                Log.e(TAG, r.bookTime?.time.toString())
+            // Log.e(TAG, "All in database")
+            //
+            // // TODO: change to viewmodel
+            // val allRecord = bookshelfDao.findAll()
+            // for (r in allRecord) {
+            //     Log.e(TAG, r.bookId)
+            //     Log.e(TAG, r.bookTitle)
+            //     Log.e(TAG, r.bookCover)
+            //     Log.e(TAG, r.bookTime?.time.toString())
+            // }
+            GlobalScope.launch {
+                val allRecord = BookshelfRepository.getAll()
+                for (r in allRecord) {
+                    Log.e(TAG, r.bookId)
+                    Log.e(TAG, r.bookTitle)
+                    Log.e(TAG, r.bookCover)
+                    Log.e(TAG, r.bookTime?.time.toString())
+                }
             }
 
         })
