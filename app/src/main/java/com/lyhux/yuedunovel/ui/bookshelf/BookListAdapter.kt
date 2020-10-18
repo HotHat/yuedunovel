@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BaseRecord
 
-class BookshelfAdapter(private var context: Context, private var recordList: List<BaseRecord>) : BaseAdapter() {
+class BookListAdapter(private var context: Context, private var recordList: List<BaseRecord>) : BaseAdapter() {
 
     override fun getView(pos: Int, contentView: View?, parent: ViewGroup?): View {
         val item = recordList[pos]

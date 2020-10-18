@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
@@ -16,6 +17,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.data.BaseRecord
+import com.lyhux.yuedunovel.data.BookRecordBean
+import com.lyhux.yuedunovel.data.BookshelfBean
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,10 +37,8 @@ class BookFragment: Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var TEXT_BIG_SIZE: Float = 0F
-    private var TEXT_SMALL_SIZE: Float = 0F
-    private var COLOR_RED: Int = 0
-    private var COLOR_BLACK: Int = 0
+
+    private  lateinit var gridView: GridView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,49 @@ class BookFragment: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
+
+        gridView = view.findViewById(R.id.fg_book_grid_view)
+
+        val recordList = arrayListOf<BaseRecord>(BookshelfBean().apply {
+            bookId = "a1234"
+            bookTitle = "测试1"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a12345"
+            bookTitle = "测试2"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a123456"
+            bookTitle = "测试3"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a1234567"
+            bookTitle = "测试4"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a1234567"
+            bookTitle = "测试5"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a1234567"
+            bookTitle = "测试6"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a1234567"
+            bookTitle = "测试7"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }, BookshelfBean().apply {
+            bookId = "a1234567"
+            bookTitle = "测试8"
+            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        }
+        )
+        val adapter = BookListAdapter(requireContext(), recordList)
+
+        gridView.adapter = adapter
+
+        return view
     }
 
     companion object {
