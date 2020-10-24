@@ -12,11 +12,18 @@
         tools:layout="@layout/fragment_book" >
         <action
             android:id="@+id/action_bookFragment_to_bookChapterFragment"
-            app:destination="@id/bookChapterFragment" />
+            app:destination="@id/nav_graph_book_chapter_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/bookChapterFragment"
+        android:id="@+id/nav_graph_book_chapter_fragment"
         android:name="com.lyhux.yuedunovel.ui.book.BookChapterFragment"
         android:label="fragment_book_chapter"
-        tools:layout="@layout/fragment_book_chapter" />
+        tools:layout="@layout/fragment_book_chapter" >
+        <argument
+            android:name="book_id"
+            app:argType="string"
+            android:defaultValue="" />
+
+    </fragment>
+
 </navigation>

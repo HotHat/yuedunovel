@@ -158,6 +158,7 @@
 
             <!-- 目录 -->
             <LinearLayout
+                android:id="@+id/fg_book_detail_chapter"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
