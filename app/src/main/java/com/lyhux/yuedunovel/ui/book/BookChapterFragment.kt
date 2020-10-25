@@ -2,14 +2,21 @@ package com.lyhux.yuedunovel.ui.book
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.api.BookApi
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "book_id"
 
 /**
@@ -17,9 +24,13 @@ private const val ARG_PARAM1 = "book_id"
  * Use the [BookChapterFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BookChapterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class BookChapterFragment : Fragment(), KoinComponent {
+
     private var bookId: String? = null
+    private val bookApi: BookApi by inject()
+    private lateinit var adapter: ArrayAdapter<String>
+
+    private lateinit var listItems: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +40,49 @@ class BookChapterFragment : Fragment() {
         }
 
 
+
+        listItems = arrayListOf("item1", "item2", "item3", "item4", "item5")
+
+
+        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItems)
+
+        GlobalScope.launch {
+            val response = bookApi.bookChapterListAsync("mock book id").await()
+
+            if (response.isSuccess) {
+                val items = response.data!!
+                Log.e(TAG, "start notify")
+                notify(items)
+                Log.e(TAG, "end notify")
+                // adapter.notifyDataSetChanged()
+                Log.e(TAG, items.toString())
+            } else {
+                Log.e(TAG, "api error: ${response.message}")
+            }
+
+        }
+
+    }
+
+    private suspend fun notify(items: List<String>) {
+        withContext(Main) {
+            adapter.clear()
+            adapter.addAll(items)
+            adapter.notifyDataSetChanged()
+        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_chapter, container, false)
+        val view = inflater.inflate(R.layout.fragment_book_chapter, container, false)
+
+        val listView = view.findViewById<ListView>(R.id.fg_book_chapter_list_view)
+
+        listView.adapter = adapter
+
+        return view
     }
 
     companion object {

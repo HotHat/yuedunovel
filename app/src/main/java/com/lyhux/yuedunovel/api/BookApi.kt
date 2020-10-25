@@ -23,7 +23,14 @@ interface BookApi {
     @GET("/api/book/detail/{id}")
     fun bookDetailAsync(@Path("id") id: String): Deferred<ApiResponse<BookBean>>
 
+    // 章节内容列表
+    @GET("/api/book/{id}/chapter")
+    fun bookChapterListAsync(@Path("id") id: String): Deferred<ApiResponse<List<String>>>
 
+    // 章节内容
+    @GET("/api/book/{bookId}/chapter/{chapterId}")
+    fun bookChapterAsync(@Path("bookId") bookId: String, @Path("chapterId") chapterId: String):
+            Deferred<ApiResponse<String>>
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("/api/json")
@@ -36,4 +43,7 @@ interface BookApi {
             @Field("name") name: String,
             @Field("password") password: String
     ): Deferred<ApiResponse<UserBean>>
+
+
+
 }

@@ -1,11 +1,13 @@
 package com.lyhux.yuedunovel.ui
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.blankj.utilcode.util.SnackbarUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.ui.account.AccountFragment
@@ -15,6 +17,7 @@ import com.lyhux.yuedunovel.ui.library.StoreFragment
 
 class NestFragmentActivity : AppCompatActivity() {
 
+    private var lastBackTime = 0L
 
     private lateinit var fragmentList: ArrayList<Fragment>
     private lateinit var currentFragment: Fragment
@@ -82,6 +85,20 @@ class NestFragmentActivity : AppCompatActivity() {
 
             true
 
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    override fun finish() {
+        val curTime = System.currentTimeMillis()
+        if (curTime - lastBackTime > 2000) {
+            lastBackTime = curTime
+            SnackbarUtils.with(window.decorView)
+                    .setMessage("再次返回退出")
+                    .setBgResource(R.color.colorPrimary)
+                    .show()
+        } else {
+            super.finish()
         }
     }
 
