@@ -1,2 +1,3 @@
+include ':page_view'
 include ':app'
 rootProject.name = "YueDuNovel"
