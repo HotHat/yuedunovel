@@ -13,8 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.data.BookRecordBean
+import com.page.view.DataConfig
 import com.page.view.PageLoader
 import com.page.view.PageView
+import com.page.view.data.BaseRecord
 import com.page.view.data.CollBookBean
 
 
@@ -76,7 +79,18 @@ class ReadFragment : Fragment() {
 
         mCollBook = CollBookBean().apply {
             isLocal = true
-            bookId = requireContext().getExternalFilesDir("/test.txt")!!.path
+            bookId = requireContext().getExternalFilesDir("/frxx.txt")!!.path
+        }
+
+        mPageLoader.dataConfig = object : DataConfig {
+            override fun saveRecord(bookRecord: BaseRecord) {
+
+            }
+
+            override fun getRecordById(bookId: String): BaseRecord {
+                return BookRecordBean()
+            }
+
         }
 
         mPageLoader.openBook(mCollBook)

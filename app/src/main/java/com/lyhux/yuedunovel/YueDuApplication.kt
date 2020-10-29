@@ -12,6 +12,7 @@ import androidx.multidex.MultiDex
 import com.lyhux.yuedunovel.api.HttpConfig
 import com.lyhux.yuedunovel.data.http.KcHttp
 import com.lyhux.yuedunovel.koin.Injector
+import com.page.view.utils.BookUtils
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -31,6 +32,7 @@ class YueDuApplication : Application() {
         super.onCreate()
         initHttp()
         initKoin()
+        BookUtils.init(this)
         registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
 
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

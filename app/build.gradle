@@ -80,7 +80,7 @@ dependencies {
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    implementation 'com.blankj:utilcodex:1.29.0'
+    // implementation 'com.blankj:utilcodex:1.29.0'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 

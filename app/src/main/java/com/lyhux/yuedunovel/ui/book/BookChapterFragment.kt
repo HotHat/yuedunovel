@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.api.BookApi
 import kotlinx.coroutines.Dispatchers.Main
@@ -81,6 +82,15 @@ class BookChapterFragment : Fragment(), KoinComponent {
         val listView = view.findViewById<ListView>(R.id.fg_book_chapter_list_view)
 
         listView.adapter = adapter
+
+        listView.setOnItemClickListener { adapterView, view, i, l ->
+            val chapterId = adapterView.getItemAtPosition(i) as String
+            view.findNavController().navigate(R.id.nav_read_fragment, Bundle().apply {
+                putString("book_id", bookId)
+                putString("chapter_id", chapterId)
+            })
+
+        }
 
         return view
     }

@@ -3,6 +3,7 @@ package com.lyhux.yuedunovel.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.page.view.data.BaseRecord
 
 /**
  * Created by LiangLu on 17-11-22.
@@ -16,16 +17,18 @@ class BookRecordBean: BaseRecord {
     override var bookId: String = ""
     // 标题
     @ColumnInfo(name="title")
-    override var bookTitle: String = ""
+    var bookTitle: String = ""
     // 封面
     @ColumnInfo(name="book_cover")
-    override var bookCover: String = ""
+    var bookCover: String = ""
 
-    //阅读到了第几章
-    @ColumnInfo(name="chapter_id")
-    var chapterId: Int = 0
     //当前的页码
     @ColumnInfo(name="page_pos")
-    var pagePos: Int = 0
+    override var pagePos: Int = 0
+
+    //阅读到了第几章
+    @ColumnInfo(name="chapter")
+    override var chapter: Int = 0
+
 
 }

@@ -23,7 +23,15 @@
             android:name="book_id"
             app:argType="string"
             android:defaultValue="" />
+        <action
+            android:id="@+id/action_nav_graph_book_chapter_fragment_to_nav_read_fragment"
+            app:destination="@id/nav_read_fragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/nav_read_fragment"
+        android:name="com.lyhux.yuedunovel.ui.read.ReadFragment"
+        android:label="fragment_read"
+        tools:layout="@layout/fragment_read" />
 
 </navigation>
