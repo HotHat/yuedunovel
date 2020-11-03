@@ -113,7 +113,7 @@ class ReadFragment : Fragment() {
 
             override fun onTouch(): Boolean {
                 // return !hideReadMenu()
-                return false
+                return true
             }
 
             override fun prePage(): Boolean {
