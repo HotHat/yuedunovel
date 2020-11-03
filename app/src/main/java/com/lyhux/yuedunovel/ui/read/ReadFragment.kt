@@ -19,6 +19,7 @@ import com.page.view.PageLoader
 import com.page.view.PageView
 import com.page.view.data.BaseRecord
 import com.page.view.data.CollBookBean
+import com.page.view.data.TxtChapter
 
 
 private const val BOOK_ID = "book_id"
@@ -79,7 +80,7 @@ class ReadFragment : Fragment() {
 
         mCollBook = CollBookBean().apply {
             isLocal = true
-            bookId = requireContext().getExternalFilesDir("/frxx.txt")!!.path
+            bookId = requireContext().getExternalFilesDir("/frxx2.txt")!!.path
         }
 
         mPageLoader.dataConfig = object : DataConfig {
@@ -104,6 +105,29 @@ class ReadFragment : Fragment() {
         //初始化屏幕常亮类
         // val pm = requireActivity().getSystemService(Context.POWER_SERVICE) as PowerManager
         // pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "keep bright")
+
+        mPvReadPage.setTouchListener(object : PageView.TouchListener {
+            override fun center() {
+                // toggleMenu()
+            }
+
+            override fun onTouch(): Boolean {
+                // return !hideReadMenu()
+                return false
+            }
+
+            override fun prePage(): Boolean {
+                return true
+            }
+
+            override fun nextPage(): Boolean {
+                return true
+            }
+
+            override fun cancel() {}
+        })
+
+
 
 
         return view
