@@ -2,6 +2,7 @@ package com.lyhux.yuedunovel.api
 
 import com.google.gson.JsonObject
 import com.lyhux.yuedunovel.data.BookBean
+import com.lyhux.yuedunovel.data.ChapterBean
 import com.lyhux.yuedunovel.data.UserBean
 import com.lyhux.yuedunovel.data.http.ApiResponse
 import kotlinx.coroutines.Deferred
@@ -30,7 +31,7 @@ interface BookApi {
     // 章节内容
     @GET("/api/book/{bookId}/chapter/{chapterId}")
     fun bookChapterAsync(@Path("bookId") bookId: String, @Path("chapterId") chapterId: String):
-            Deferred<ApiResponse<String>>
+            Deferred<ApiResponse<ChapterBean>>
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("/api/json")
