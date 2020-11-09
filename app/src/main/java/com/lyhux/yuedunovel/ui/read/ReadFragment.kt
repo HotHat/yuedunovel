@@ -6,20 +6,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.os.Environment
-import android.os.PowerManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.data.BookRecordBean
+import com.lyhux.yuedunovel.data.ChapterBean
 import com.page.view.DataConfig
 import com.page.view.PageLoader
 import com.page.view.PageView
 import com.page.view.data.BaseRecord
+import com.page.view.data.BookChapterBean
 import com.page.view.data.CollBookBean
 import com.page.view.data.TxtChapter
+import org.koin.android.ext.android.inject
+import org.koin.core.KoinComponent
 
 
 private const val BOOK_ID = "book_id"
@@ -30,15 +33,19 @@ private const val CHAPTER_ID= "chapter_id"
  * Use the [ReadFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ReadFragment : Fragment() {
+class ReadFragment : Fragment(), KoinComponent, IBookChapters {
     // TODO: Rename and change types of parameters
     private var bookId: String? = null
     private var chapterId: String? = null
+
+    private val bookApi: BookApi by inject()
 
     private lateinit var mPageLoader: PageLoader
     private lateinit var mCollBook: CollBookBean
 
     private lateinit var mPvReadPage: PageView
+    internal var mTxtChapters: MutableList<TxtChapter> = mutableListOf()
+    private var bookChapterList: MutableList<BookChapterBean> = mutableListOf()
 
     // r接收电池信息和时间更新的广播
     private val mReceiver = object : BroadcastReceiver() {
@@ -75,13 +82,29 @@ class ReadFragment : Fragment() {
 
         mPvReadPage = view.findViewById(R.id.pv_read_page)
 
-        mPageLoader = mPvReadPage.getPageLoader(true)
+        mPageLoader = mPvReadPage.getPageLoader(false)
 
+
+        // mCollBook = CollBookBean().apply {
+            // isLocal = true
+            // bookId = requireContext().getExternalFilesDir("/frxx2.txt")!!.path
+        // }
 
         mCollBook = CollBookBean().apply {
-            isLocal = true
-            bookId = requireContext().getExternalFilesDir("/frxx2.txt")!!.path
+            isLocal = false
+            bookId = "test_1234"
+        //     bookChapters = arrayListOf(BookChapterBean().apply {
+        //         bookId = "test_1234"
+        //         title = "test_000"
+        //         link = "link1234"
+        //     }, BookChapterBean().apply {
+        //         bookId = "test_1234"
+        //         title = "test_001"
+        //         link = "link1234"
+        //     })
         }
+
+
 
         mPageLoader.dataConfig = object : DataConfig {
             override fun saveRecord(bookRecord: BaseRecord) {
@@ -94,7 +117,6 @@ class ReadFragment : Fragment() {
 
         }
 
-        mPageLoader.openBook(mCollBook)
 
         //注册广播
         val intentFilter = IntentFilter()
@@ -127,10 +149,63 @@ class ReadFragment : Fragment() {
             override fun cancel() {}
         })
 
+        mPageLoader.setOnPageChangeListener(object : PageLoader.OnPageChangeListener {
+            override fun onChapterChange(pos: Int) {
+                setCategorySelect(pos)
+
+            }
+
+            override fun onLoadChapter(chapters: List<TxtChapter>, pos: Int) {
+                ReadHelper.loadContent(bookApi, mCollBook.bookId, chapters, this@ReadFragment)
+                setCategorySelect(mPageLoader.chapterPos)
+
+                // if (mPageLoader.pageStatus == PageLoader.STATUS_LOADING
+                //         || mPageLoader.pageStatus == PageLoader.STATUS_ERROR
+                // ) {
+                //     //冻结使用
+                //     read_sb_chapter_progress.isEnabled = false
+                // }
+                //
+                // //隐藏提示
+                // read_tv_page_tip.isVisible = false
+                // read_sb_chapter_progress.progress = 0
+            }
+
+            override fun onCategoryFinish(chapters: List<TxtChapter>) {
+                mTxtChapters.clear()
+                mTxtChapters.addAll(chapters)
+                // mReadCategoryAdapter.notifyDataSetChanged()
+            }
+
+            override fun onPageCountChange(count: Int) {
+            }
+
+            override fun onPageChange(pos: Int) {
+
+            }
+        })
 
 
+        ReadHelper.loadChapters(bookApi, "test_1234", this)
+
+        // mPageLoader.openBook(mCollBook)
+        //
+        // mPageLoader.skipToChapter(0)
 
         return view
+    }
+
+    /**
+     * 设置选中目录
+     *
+     * @param selectPos
+     */
+    private fun setCategorySelect(selectPos: Int) {
+        for (i in mTxtChapters.indices) {
+            val chapter = mTxtChapters[i]
+            chapter.isSelect = i == selectPos
+        }
+        // mReadCategoryAdapter.notifyDataSetChanged()
     }
 
     companion object {
@@ -154,4 +229,50 @@ class ReadFragment : Fragment() {
                     }
                 }
     }
+
+    override fun errorChapters() {
+        if (mPageLoader.pageStatus == PageLoader.STATUS_LOADING) {
+            mPageLoader.chapterError()
+        }
+    }
+
+    override fun finishChapters() {
+        if (mPageLoader.pageStatus == PageLoader.STATUS_LOADING) {
+            // pv_read_page.post {
+            mPageLoader.openChapter()
+                //当完成章节的时候，刷新列表
+            //     mReadCategoryAdapter.notifyDataSetChanged()
+            // }
+        }
+    }
+
+    override fun bookChapters(bookChaptersBean: List<ChapterBean>) {
+        bookChapterList.clear()
+        // for (bean in bookChaptersBean.chapters) {
+        //     val chapterBean = BookChapterBean()
+        //     chapterBean.bookId = bookChaptersBean.book
+        //     chapterBean.link = bean.link
+        //     chapterBean.title = bean.title
+        //     //chapterBean.setTaskName("下载");
+        //     chapterBean.unreadble = bean.isRead
+        //     bookChapterList.add(chapterBean)
+        // }
+        for (bean in bookChaptersBean) {
+                bookChapterList.add(BookChapterBean().apply {
+                    bookId = bean.bookId
+                    title  = bean.title
+                    link   = bean.link
+                })
+        }
+        mCollBook.bookChapters = bookChapterList
+        //如果是更新加载，那么重置PageLoader的Chapter
+        /*if (mCollBook.isUpdate() && isCollected) {
+            mPageLoader.setChapterList(bookChapterList)
+            //异步下载更新的内容存到数据库
+            //fixme db
+//            BookChapterHelper.getsInstance()
+//                .saveBookChaptersWithAsync(bookChapterList)
+
+        } else {*/
+        mPageLoader.openBook(mCollBook)    }
 }

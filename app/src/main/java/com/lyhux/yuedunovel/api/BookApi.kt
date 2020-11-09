@@ -5,6 +5,7 @@ import com.lyhux.yuedunovel.data.BookBean
 import com.lyhux.yuedunovel.data.ChapterBean
 import com.lyhux.yuedunovel.data.UserBean
 import com.lyhux.yuedunovel.data.http.ApiResponse
+import com.page.view.data.TxtChapter
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Response
@@ -32,6 +33,11 @@ interface BookApi {
     @GET("/api/book/{bookId}/chapter/{chapterId}")
     fun bookChapterAsync(@Path("bookId") bookId: String, @Path("chapterId") chapterId: String):
             Deferred<ApiResponse<ChapterBean>>
+
+    // 章节内容测试用
+    @GET("/api/book/chapter/{chapterId}")
+    fun bookChapterAsync2(@Path("url") url: String):
+            Deferred<ChapterBean>
 
     @Headers("Content-Type:application/json; charset=UTF-8")
     @POST("/api/json")

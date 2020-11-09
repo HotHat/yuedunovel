@@ -7,5 +7,6 @@ package com.lyhux.yuedunovel.data
 data class ChapterBean(
     var bookId: String,
     var title: String,
-    var content: String
+    var content: String,
+    var link: String
 )
