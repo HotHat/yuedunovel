@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object KcHttp {
 
 
-    var globalBaseUrl: String = "http://www.aku.com/"
+    var globalBaseUrl: String = "http://www.lyhux.com/"
     /**
      * 全局的retrofitBuilder
      */

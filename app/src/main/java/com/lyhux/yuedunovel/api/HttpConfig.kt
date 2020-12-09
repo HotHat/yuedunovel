@@ -13,10 +13,11 @@ object HttpConfig {
      * 描述： 设置token
      */
     fun tokenInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            val request = configRequestBuilder(chain)
-            return@Interceptor chain.proceed(request.build())
-        }
+        return SignInterceptor()
+        // return Interceptor { chain ->
+        //     val request = configRequestBuilder(chain)
+        //     return@Interceptor chain.proceed(request.build())
+        // }
     }
 
     /**
