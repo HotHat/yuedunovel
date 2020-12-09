@@ -16,23 +16,31 @@ interface BookApi {
         const val BASE_URL = "http://192.168.33.10"
     }
 
+    @GET("/api/v1/book-detail?")
+    fun bookDetailAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<BookBean>>
+
+    @GET("/api/v1/library-portal")
+    fun libraryPortalAsync(): Deferred<ApiResponse<BookBean>>
+
+    // 章节内容列表
+    @GET("api/v1/book-chapter-list")
+    fun bookChapterListAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<List<String>>>
+
+    // 章节内容
+    @GET("/api/v1/book-chapter-detail")
+    fun bookChapterAsync(@Query("book_id") bookId: String, @Query("chapter_id") chapterId: String):
+            Deferred<ApiResponse<ChapterBean>>
+
+
+    // below api only for test
+
     @GET("/api/book/category/{id}/{page}")
     fun categoryAsync(
         @Path("id") id: String,
         @Path("page") page: Int
     ): Deferred<ApiResponse<List<BookBean>>>
 
-    @GET("/api/book/detail/{id}")
-    fun bookDetailAsync(@Path("id") id: String): Deferred<ApiResponse<BookBean>>
 
-    // 章节内容列表
-    @GET("/api/book/{id}/chapter")
-    fun bookChapterListAsync(@Path("id") id: String): Deferred<ApiResponse<List<String>>>
-
-    // 章节内容
-    @GET("/api/book/{bookId}/chapter/{chapterId}")
-    fun bookChapterAsync(@Path("bookId") bookId: String, @Path("chapterId") chapterId: String):
-            Deferred<ApiResponse<ChapterBean>>
 
     // 章节内容测试用
     @GET("/api/book/chapter/{chapterId}")
