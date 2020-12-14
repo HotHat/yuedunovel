@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 
 
@@ -74,6 +75,10 @@ class StoreCategoryBlockView : LinearLayout {
                 val img = imgArr[idx]
                 val title = titleArr[idx]
                 // setImimg.setIm(item.imageUrl)
+                Glide.with(context)
+                        .load(item.imageUrl)
+                        .placeholder(R.drawable.book_shelf_search)
+                        .into(img);
                 title.text = item.title
                 img.setOnClickListener {
                     Log.e(TAG, "novel book id: ${item.bookId}")

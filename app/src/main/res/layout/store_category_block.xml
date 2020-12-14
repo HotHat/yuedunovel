@@ -45,12 +45,14 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:background="#9C27B0"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img1"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -61,8 +63,9 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
-                android:text="婚内燃情呆困枯基本面基本面苛" />
+                android:text="婚内燃" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,12 +73,14 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:background="#2196F3"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img2"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -86,6 +91,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="婚内燃情呆困枯基本面基本面苛" />
         </LinearLayout>
@@ -95,12 +101,14 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:backgroundTint="#8BC34A"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img3"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -111,6 +119,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="婚内燃情呆困枯基本面基本面苛" />
         </LinearLayout>
@@ -120,12 +129,14 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:background="#8BC34A"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img4"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -136,6 +147,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="婚内燃情呆困枯基本面基本面苛" />
         </LinearLayout>
@@ -145,12 +157,13 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img5"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -161,6 +174,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="婚内燃情呆困枯基本面基本面苛" />
         </LinearLayout>
@@ -170,12 +184,13 @@
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img6"
                 android:layout_width="100dp"
-                 android:layout_height="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:src="@color/pink" />
@@ -186,6 +201,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="婚内燃情呆困枯基本面基本面苛" />
         </LinearLayout>

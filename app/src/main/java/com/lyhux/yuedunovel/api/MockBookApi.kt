@@ -37,6 +37,10 @@ class MockBookApi : BookApi {
         }
     }
 
+    override fun libraryPortalAsync(): Deferred<ApiResponse<BookBean>> {
+        TODO("Not yet implemented")
+    }
+
     override fun bookChapterListAsync(id: String): Deferred<ApiResponse<List<String>>> {
         return GlobalScope.async {
             ApiResponse<List<String>>(1,

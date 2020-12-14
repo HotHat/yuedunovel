@@ -27,10 +27,12 @@
             <include layout="@layout/store_category" />
 
             <com.lyhux.yuedunovel.cv.StoreCategoryBlockView
+                android:id="@+id/category1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <com.lyhux.yuedunovel.cv.StoreCategoryBlockView
+                android:id="@+id/category2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
