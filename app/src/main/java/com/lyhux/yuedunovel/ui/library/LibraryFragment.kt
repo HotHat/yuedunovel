@@ -1,15 +1,18 @@
 package com.lyhux.yuedunovel.ui.library
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.cv.ImageTextItem
 import com.lyhux.yuedunovel.cv.StoreCategoryBlockView
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.BaseBannerInfo
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,13 +68,22 @@ class StoreFragment : Fragment() {
         // mXBanner.loadImage(XBanner.XBannerAdapter())
         mXBanner.setBannerData(mutableListOf(object:BaseBannerInfo{
             override fun getXBannerUrl(): Any {
-                return "https://res.cocomanhua.com/comic/14423/cover.jpg"
+                return "https://feed-image.baidu.com/0/pic/1f8728565d98b8747c6c9bfcf5bf1982.jpg"
             }
 
             override fun getXBannerTitle(): String {
                 return "这里是标题"
             }
         }))
+
+        //加载广告图片
+
+        //加载广告图片
+        mXBanner.loadImage { banner, model, view, position ->
+            //1、此处使用的Glide加载图片，可自行替换自己项目中的图片加载框架
+            //2、返回的图片路径为Object类型，你只需要强转成你传输的类型就行，切记不要胡乱强转！
+            Glide.with(this.requireActivity()).load((model as BaseBannerInfo).xBannerUrl).placeholder(R.drawable.ic_shelf_newedit).error(R.drawable.ic_shelf_newedit).into(view as ImageView)
+        }
 
         return view
     }
