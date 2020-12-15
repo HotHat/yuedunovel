@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.cv.ImageTextItem
 import com.lyhux.yuedunovel.cv.StoreCategoryBlockView
+import com.stx.xhb.androidx.XBanner
+import com.stx.xhb.androidx.entity.BaseBannerInfo
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +27,7 @@ class StoreFragment : Fragment() {
     private var param2: String? = null
     private lateinit var category1: StoreCategoryBlockView
     private lateinit var category2: StoreCategoryBlockView
+    private lateinit var mXBanner : XBanner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +60,18 @@ class StoreFragment : Fragment() {
                 ImageTextItem(11, "https://res1.xiaoqinre.com/images/cover/202012/1607337790f6oI732I6aVyI416.jpg",  "学姐，不要直播出去！"),
                 ImageTextItem(12, "https://res1.xiaoqinre.com/images/cover/202008/1598511842VmNUod3GRindGqxP.jpg",  "纸箱战机")
         ))
+
+        mXBanner = view.findViewById(R.id.xbanner)
+        // mXBanner.loadImage(XBanner.XBannerAdapter())
+        mXBanner.setBannerData(mutableListOf(object:BaseBannerInfo{
+            override fun getXBannerUrl(): Any {
+                return "https://res.cocomanhua.com/comic/14423/cover.jpg"
+            }
+
+            override fun getXBannerTitle(): String {
+                return "这里是标题"
+            }
+        }))
 
         return view
     }
