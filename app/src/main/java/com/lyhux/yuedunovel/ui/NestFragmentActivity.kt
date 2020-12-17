@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.ui.account.AccountFragment
 import com.lyhux.yuedunovel.ui.bookshelf.BookshelfFragment
-import com.lyhux.yuedunovel.ui.library.StoreFragment
+import com.lyhux.yuedunovel.ui.library.LibraryFragment
 
 
 class NestFragmentActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class NestFragmentActivity : AppCompatActivity() {
 
         fragmentList = arrayListOf<Fragment>(
             BookshelfFragment.newInstance(),
-            StoreFragment.newInstance(),
+            LibraryFragment.newInstance(),
             AccountFragment.newInstance()
         )
 

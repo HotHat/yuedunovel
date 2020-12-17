@@ -4,6 +4,7 @@ import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.api.MockBookApi
 import com.lyhux.yuedunovel.data.db.AppDatabase
 import com.lyhux.yuedunovel.data.http.KcHttp
+import com.lyhux.yuedunovel.ui.library.LibraryFragmentModel
 import com.lyhux.yuedunovel.ui.login.LoginViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -46,6 +47,11 @@ object Injector {
         viewModel {
             LoginViewModel()
         }
+
+        viewModel {
+            LibraryFragmentModel()
+        }
+
 
     }
 
