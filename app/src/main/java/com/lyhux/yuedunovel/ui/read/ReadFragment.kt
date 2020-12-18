@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.api.BookApi
-import com.lyhux.yuedunovel.data.BookRecordBean
-import com.lyhux.yuedunovel.data.ChapterBean
+import com.lyhux.yuedunovel.data.db.ReadingRecordBean
+import com.lyhux.yuedunovel.data.http.ChapterItemBean
 import com.page.view.DataConfig
 import com.page.view.PageLoader
 import com.page.view.PageView
@@ -112,7 +112,7 @@ class ReadFragment : Fragment(), KoinComponent, IBookChapters {
             }
 
             override fun getRecordById(bookId: String): BaseRecord {
-                return BookRecordBean()
+                return ReadingRecordBean()
             }
 
         }
@@ -246,7 +246,7 @@ class ReadFragment : Fragment(), KoinComponent, IBookChapters {
         }
     }
 
-    override fun bookChapters(bookChaptersBean: List<ChapterBean>) {
+    override fun bookChapters(bookChaptersBean: List<ChapterItemBean>) {
         bookChapterList.clear()
         // for (bean in bookChaptersBean.chapters) {
         //     val chapterBean = BookChapterBean()
@@ -261,7 +261,7 @@ class ReadFragment : Fragment(), KoinComponent, IBookChapters {
                 bookChapterList.add(BookChapterBean().apply {
                     bookId = bean.bookId
                     title  = bean.title
-                    link   = bean.link
+                    // link   = bean.link
                 })
         }
         mCollBook.bookChapters = bookChapterList

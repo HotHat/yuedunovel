@@ -6,13 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.lyhux.yuedunovel.data.BookBean
-import com.lyhux.yuedunovel.data.BookRecordBean
-import com.lyhux.yuedunovel.data.BookshelfBean
 
 @Database(
     entities = [
         // BookType::class,
-        BookRecordBean::class,
+        ReadingRecordBean::class,
         BookshelfBean::class,
         BookBean::class
     ],
@@ -23,7 +21,7 @@ import com.lyhux.yuedunovel.data.BookshelfBean
 abstract class AppDatabase : RoomDatabase() {
 
     // abstract fun bookTypeDao(): BookTypeDao
-    abstract fun bookRecordDao(): BookRecordDao
+    abstract fun bookRecordDao(): ReadingRecordDao
     abstract fun bookDao(): BookDao
     abstract fun bookShelfDao(): BookshelfDao
 

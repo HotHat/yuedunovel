@@ -8,7 +8,7 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.lyhux.yuedunovel.R
-import com.lyhux.yuedunovel.data.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfBean
 import com.lyhux.yuedunovel.data.db.BookshelfDao
 import com.lyhux.yuedunovel.data.repository.BookshelfRepository
 import kotlinx.coroutines.GlobalScope

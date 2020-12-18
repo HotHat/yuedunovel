@@ -1,4 +1,4 @@
-package com.lyhux.yuedunovel.data
+package com.lyhux.yuedunovel.data.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,7 +10,7 @@ import com.page.view.data.BaseRecord
  * 阅读记录 fixme 不属于控件必须要的
  */
 @Entity(tableName = "book_record")
-class BookRecordBean: BaseRecord {
+class ReadingRecordBean: BaseRecord {
     //所属的书的id
     @PrimaryKey
     @ColumnInfo(name="book_id")
@@ -29,6 +29,5 @@ class BookRecordBean: BaseRecord {
     //阅读到了第几章
     @ColumnInfo(name="chapter")
     override var chapter: Int = 0
-
 
 }

@@ -1,25 +1,14 @@
 package com.lyhux.yuedunovel.ui.bookshelf
 
-import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BaseRecord
-import com.lyhux.yuedunovel.data.BookRecordBean
-import com.lyhux.yuedunovel.data.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfBean
 
 
 // TODO: Rename parameter arguments, choose names that match

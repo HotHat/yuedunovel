@@ -1,6 +1,6 @@
 package com.lyhux.yuedunovel.data.repository
 
-import com.lyhux.yuedunovel.data.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfBean
 import com.lyhux.yuedunovel.data.db.BookshelfDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +31,7 @@ object BookshelfRepository : KoinComponent {
 
     suspend fun getAll(): List<BookshelfBean> {
         return withContext(Dispatchers.IO) {
-            bookshelfDao.findAll()
+            bookshelfDao.getAll()
         }
     }
 

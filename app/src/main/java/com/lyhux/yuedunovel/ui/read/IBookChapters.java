@@ -1,7 +1,7 @@
 package com.lyhux.yuedunovel.ui.read;
 
 
-import com.lyhux.yuedunovel.data.ChapterBean;
+import com.lyhux.yuedunovel.data.http.ChapterItemBean;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface IBookChapters {
-    void bookChapters(List<ChapterBean> ChaptersBean);
+    void bookChapters(List<ChapterItemBean> ChaptersBean);
 
     void finishChapters();
 
