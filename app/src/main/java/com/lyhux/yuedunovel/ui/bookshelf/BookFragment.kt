@@ -47,43 +47,43 @@ class BookFragment: Fragment() {
 
         gridView = view.findViewById(R.id.fg_book_grid_view)
 
-        val recordList = arrayListOf<BaseRecord>(BookshelfBean().apply {
-            bookId = "a1234"
-            bookTitle = "测试1"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a12345"
-            bookTitle = "测试2"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a123456"
-            bookTitle = "测试3"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a1234567"
-            bookTitle = "测试4"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a1234567"
-            bookTitle = "测试5"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a1234567"
-            bookTitle = "测试6"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a1234567"
-            bookTitle = "测试7"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }, BookshelfBean().apply {
-            bookId = "a1234567"
-            bookTitle = "测试8"
-            bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        }
-        )
-        val adapter = BookListAdapter(requireContext(), recordList)
+        // val recordList = arrayListOf<BaseRecord>(BookshelfBean().apply {
+        //     bookId = "a1234"
+        //     bookTitle = "测试1"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a12345"
+        //     bookTitle = "测试2"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a123456"
+        //     bookTitle = "测试3"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a1234567"
+        //     bookTitle = "测试4"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a1234567"
+        //     bookTitle = "测试5"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a1234567"
+        //     bookTitle = "测试6"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a1234567"
+        //     bookTitle = "测试7"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }, BookshelfBean().apply {
+        //     bookId = "a1234567"
+        //     bookTitle = "测试8"
+        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
+        // }
+        // )
+        // val adapter = BookListAdapter(requireContext(), recordList)
 
-        gridView.adapter = adapter
+        // gridView.adapter = adapter
 
         return view
     }

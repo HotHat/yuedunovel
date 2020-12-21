@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lyhux.yuedunovel.api.BookApi
-import com.lyhux.yuedunovel.api.LoginParams
-import com.lyhux.yuedunovel.data.UserBean
 import com.lyhux.yuedunovel.data.http.ApiResponse
+import com.lyhux.yuedunovel.data.http.LibraryBean
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -21,16 +20,13 @@ class LibraryFragmentModel : ViewModel(), KoinComponent {
 //    val name: ObservableField<String> = ObservableField()
 //    val password: ObservableField<String> = ObservableField()
 
-    val response: MutableLiveData<ApiResponse<UserBean>> = MutableLiveData()
+    val response: MutableLiveData<ApiResponse<LibraryBean>> = MutableLiveData()
 
-    fun login() {
+    fun getLibraryPortal() {
         viewModelScope.launch {
 
             try {
-                val result = bookApi.loginAsync(
-                        "abc",
-                        "123456"
-                ).await()
+                val result = bookApi.libraryPortalAsync().await()
 
                 Log.e(TAG, result.toString())
 
@@ -39,8 +35,6 @@ class LibraryFragmentModel : ViewModel(), KoinComponent {
                 } else {
                     response.postValue(result)
                 }
-
-                val result2 = bookApi.jsonAsync(LoginParams("abc", "123456")).await()
 
             } catch (e: Exception){
                 response.postValue(ApiResponse(0, e.message.toString(), null))

@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content" />
 
             <com.lyhux.yuedunovel.cv.StoreCategoryBlockView
+                android:id="@+id/category3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

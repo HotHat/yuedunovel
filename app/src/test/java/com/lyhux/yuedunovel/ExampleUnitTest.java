@@ -119,4 +119,9 @@ public class ExampleUnitTest {
         }
         return StrBuff.toString();
     }
+
+    @Test
+    public void libraryPortalAsync() {
+        System.out.println("Hello world");
+    }
 }

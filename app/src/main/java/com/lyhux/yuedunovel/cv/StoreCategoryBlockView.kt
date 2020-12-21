@@ -60,14 +60,15 @@ class StoreCategoryBlockView : LinearLayout {
 
     }
 
-    fun setMoreCategory(category: Int) {
+    fun setMoreCategory(category: String) {
+        titleText.text = category
         moreText.setOnClickListener {
             Log.e(TAG, "more go to category $category")
         }
 
     }
 
-    fun setContent(items: ArrayList<ImageTextItem>) {
+    fun setContent(items: List<ImageTextItem>) {
         // adapter = items
 
         for ((idx, item) in items.withIndex()) {
