@@ -8,6 +8,7 @@ import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.api.LoginParams
 import com.lyhux.yuedunovel.data.BookBean
 import com.lyhux.yuedunovel.data.http.ApiResponse
+import com.lyhux.yuedunovel.data.http.BookDetailBean
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -16,9 +17,9 @@ class BookViewModel : ViewModel(), KoinComponent {
 
     private val bookApi: BookApi by inject()
 
-    val response: MutableLiveData<ApiResponse<BookBean>> = MutableLiveData()
+    val response: MutableLiveData<ApiResponse<BookDetailBean>> = MutableLiveData()
 
-    fun login() {
+    fun getDetail() {
 
         viewModelScope.launch {
 

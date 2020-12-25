@@ -1,6 +1,7 @@
 package com.lyhux.yuedunovel.cv
 
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.ui.book.BookActivity
 
 
 class StoreCategoryBlockView : LinearLayout {
@@ -82,7 +84,10 @@ class StoreCategoryBlockView : LinearLayout {
                         .into(img);
                 title.text = item.title
                 img.setOnClickListener {
-                    Log.e(TAG, "novel book id: ${item.bookId}")
+                    val intent = Intent(context, BookActivity::class.java).apply {
+                        putExtra("book_id", item.bookId)
+                    }
+                    context.startActivity(intent)
                 }
             }
         }

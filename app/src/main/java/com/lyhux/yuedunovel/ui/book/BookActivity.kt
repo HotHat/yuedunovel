@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.SnackbarUtils
@@ -13,12 +14,17 @@ class BookActivity : AppCompatActivity() {
 
     private var lastBackTime = 0L
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
 
-        // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_book_detail_fragment) as NavHostFragment
-        // val navController = navHostFragment.navController
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_book_detail_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        navController.setGraph(navController.graph,
+                BookFragmentArgs(intent.getStringExtra("book_id") ?: "").toBundle())
         //
         // navController.navInflater
     }

@@ -4,6 +4,7 @@ import com.lyhux.yuedunovel.data.BookBean
 import com.lyhux.yuedunovel.data.http.ChapterItemBean
 import com.lyhux.yuedunovel.data.UserBean
 import com.lyhux.yuedunovel.data.http.ApiResponse
+import com.lyhux.yuedunovel.data.http.BookDetailBean
 import com.lyhux.yuedunovel.data.http.LibraryBean
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
@@ -14,7 +15,7 @@ interface BookApi {
     }
 
     @GET("/api/v1/book-detail?")
-    fun bookDetailAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<BookBean>>
+    fun bookDetailAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<BookDetailBean>>
 
     @GET("/api/v1/library-portal")
     fun libraryPortalAsync(): Deferred<ApiResponse<LibraryBean>>

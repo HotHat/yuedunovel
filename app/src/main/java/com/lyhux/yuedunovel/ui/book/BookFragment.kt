@@ -1,17 +1,18 @@
 package com.lyhux.yuedunovel.ui.book
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.lyhux.yuedunovel.R
+import org.koin.android.ext.android.inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "book_id"
+private const val BOOK_ID = "book_id"
 
 /**
  * A simple [Fragment] subclass.
@@ -19,14 +20,32 @@ private const val ARG_PARAM1 = "book_id"
  * create an instance of this fragment.
  */
 class BookFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var bookId: String? = null
+    private val bookViewModel: BookViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            bookId = it.getString(ARG_PARAM1)
+            bookId = it.getString(BOOK_ID)
         }
+
+        Log.e(TAG, arguments.toString())
+        Log.e(TAG, arguments?.getString("book_id") ?: "Cant't get book id")
+
+        if (bookId == "") {
+            requireActivity().finish()
+        }
+
+        bookViewModel.getDetail()
+
+        bookViewModel.response.observe(this, Observer {
+            it.doSuccess {
+
+            }
+            .doError {
+
+            }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,11 +74,12 @@ class BookFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(bookId: String) =
                 BookFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
+                        putString(BOOK_ID, bookId)
                     }
                 }
+        const val TAG = "BookFragment"
     }
 }

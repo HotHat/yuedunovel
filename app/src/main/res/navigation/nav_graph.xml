@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_bookFragment_to_bookChapterFragment"
             app:destination="@id/nav_graph_book_chapter_fragment" />
+        <argument
+            android:name="book_id"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
     <fragment
         android:id="@+id/nav_graph_book_chapter_fragment"

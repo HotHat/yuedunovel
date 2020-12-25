@@ -21,15 +21,19 @@ class MockBookApi : BookApi {
         TODO("Not yet implemented")
     }
 
-    override fun bookDetailAsync(id: String): Deferred<ApiResponse<BookBean>> {
+    override fun bookDetailAsync(id: String): Deferred<ApiResponse<BookDetailBean>> {
         return GlobalScope.async {
-            ApiResponse<BookBean>(1,
+            ApiResponse<BookDetailBean>(1,
                     "操作成功",
-                    BookBean(
-                            "hello",
-                            "icon",
-                            "ttt"
-                    )
+                    BookDetailBean().apply {
+                        bookId = "002123456"
+                        bookName = ""
+                        bookCover = ""
+                        bookAuthor = "无敌小白"
+                        updateTime = "2020-12-25"
+                        totalClicks = 2012
+                        totalWords = 100
+                    }
             )
         }
     }
@@ -47,11 +51,11 @@ class MockBookApi : BookApi {
                    ),
                            listOf("恐怖靈異", "歷史軍事", "科幻小說", "玄幻魔法", "都市言情"),
                            listOf(BlockItem("恐怖靈異", listOf(BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/201807/1530537387O-NvKf3ZohGRjv6E.jpg",  "书桌名要"),
-                                   BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202003/1584710976ZTr6VbXMcLLMqpN_.jpg",  "学姐，不要直播出去！"),
-                                   BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/201802/1519006021WbTCmS0j8HZbGmCl.jpg",  "悠米的玩偶"),
-                                   BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202012/1607591222jS3RgD6h6EjARjuz.jpg",  "纸箱战机"),
-                                   BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202012/1607337790f6oI732I6aVyI416.jpg",  "学姐，不要直播出去！"),
-                                   BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202008/1598511842VmNUod3GRindGqxP.jpg",  "纸箱战机"))),
+                                   BlockBookItem("0000001", "https://res1.xiaoqinre.com/images/cover/202003/1584710976ZTr6VbXMcLLMqpN_.jpg",  "学姐，不要直播出去！"),
+                                   BlockBookItem("0000002", "https://res1.xiaoqinre.com/images/cover/201802/1519006021WbTCmS0j8HZbGmCl.jpg",  "悠米的玩偶"),
+                                   BlockBookItem("0000003", "https://res1.xiaoqinre.com/images/cover/202012/1607591222jS3RgD6h6EjARjuz.jpg",  "纸箱战机"),
+                                   BlockBookItem("0000004", "https://res1.xiaoqinre.com/images/cover/202012/1607337790f6oI732I6aVyI416.jpg",  "学姐，不要直播出去！"),
+                                   BlockBookItem("0000005", "https://res1.xiaoqinre.com/images/cover/202008/1598511842VmNUod3GRindGqxP.jpg",  "纸箱战机"))),
                                    BlockItem("科幻小說", listOf( BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202012/1607930027BuZAoVwSA4N7f8iR.jpg",  "特搜组大吾 救国的橘色部队"),
                                            BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202012/1607927806yEQ11SRIx0SfA6T3.jpg",  "神与地下城"),
                                            BlockBookItem("0288828", "https://res1.xiaoqinre.com/images/cover/202012/1607337790f6oI732I6aVyI416.jpg",  "悠米的玩偶"),

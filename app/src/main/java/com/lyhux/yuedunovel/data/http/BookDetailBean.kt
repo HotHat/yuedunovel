@@ -15,7 +15,7 @@ class BookDetailBean {
     @SerializedName("cover")
     var bookCover: String = ""
 
-    @SerializedName("cover")
+    @SerializedName("author")
     var bookAuthor: String = ""
 
     @SerializedName("update_time")
