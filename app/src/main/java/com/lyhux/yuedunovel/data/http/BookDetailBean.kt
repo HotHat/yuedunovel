@@ -18,14 +18,24 @@ class BookDetailBean {
     @SerializedName("author")
     var bookAuthor: String = ""
 
-    @SerializedName("update_time")
-    var updateTime : String = ""
+    var bookStatus: String = ""
 
-    @SerializedName("total_clicks")
-    var totalClicks: Int = 0
+    @SerializedName("book_desc")
+    var bookDesc: String = ""
 
-    @SerializedName("total_words")
-    var totalWords: Int = 0
+    @SerializedName("popular_count")
+    var popularCount: String = ""
 
-    var status: String = ""
+    @SerializedName("read_count")
+    var readCount: String = ""
+
+    @SerializedName("words_count")
+    var wordsCount: String = ""
+
+    @SerializedName("last_chapter")
+    var lastChapter: String = ""
+
+    @SerializedName("updated_date")
+    var updatedDate: String = ""
+
 }

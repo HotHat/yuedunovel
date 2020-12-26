@@ -27,12 +27,15 @@ class MockBookApi : BookApi {
                     "操作成功",
                     BookDetailBean().apply {
                         bookId = "002123456"
-                        bookName = ""
-                        bookCover = ""
+                        bookName = "一念永恒"
+                        bookCover = "https://res1.xiaoqinre.com/images/cover/201807/1530537387O-NvKf3ZohGRjv6E.jpg"
                         bookAuthor = "无敌小白"
-                        updateTime = "2020-12-25"
-                        totalClicks = 2012
-                        totalWords = 100
+                        updatedDate = "2020-12-25"
+                        readCount = "2012已读"
+                        popularCount = "100人气"
+                        wordsCount = "100万字"
+                        bookDesc = "这里是很长很长的文字描述"
+                        status = "某某分类|连载中"
                     }
             )
         }
