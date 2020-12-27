@@ -1,11 +1,8 @@
 package com.lyhux.yuedunovel.api
 
 import com.lyhux.yuedunovel.data.BookBean
-import com.lyhux.yuedunovel.data.http.ChapterItemBean
 import com.lyhux.yuedunovel.data.UserBean
-import com.lyhux.yuedunovel.data.http.ApiResponse
-import com.lyhux.yuedunovel.data.http.BookDetailBean
-import com.lyhux.yuedunovel.data.http.LibraryBean
+import com.lyhux.yuedunovel.data.http.*
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 
@@ -22,7 +19,7 @@ interface BookApi {
 
     // 章节内容列表
     @GET("api/v1/book-chapter-list")
-    fun bookChapterListAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<List<String>>>
+    fun bookChapterListAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<List<ChapterItemBean>>>
 
     // 章节内容
     @GET("/api/v1/book-chapter-detail")

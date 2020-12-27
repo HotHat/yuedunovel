@@ -37,19 +37,19 @@
                         android:id="@+id/frag_book_name"
                         android:layout_width="match_parent"
                         android:layout_height="26sp"
-                        android:text="灵药空间:学霸医女种田记" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/frag_book_author"
                         android:layout_width="match_parent"
                         android:layout_height="18sp"
-                        android:text="龙小二" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/frag_book_category_status"
                         android:layout_width="match_parent"
                         android:layout_height="18dp"
-                        android:text="穿越时空 | 完结" />
+                        android:text="" />
                 </LinearLayout>
 
 
@@ -72,7 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:gravity="center_horizontal"
-                        android:text="8.8" />
+                        android:text="" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:gravity="center_horizontal"
-                            android:text="8.8" />
+                            android:text="" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:gravity="center_horizontal"
-                            android:text="8.8" />
+                            android:text="" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                 android:id="@+id/frag_book_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="漫画简介：因为一本时空妖灵之书，时空发生了扭转，本应战死在神兽围攻中的聂离，一睁开眼已经坐在了教室，他回到了十三岁。当一切重新开始之时，他如何守护自己的挚爱之人"
+                android:text=""
                 android:textSize="24dp" />
 
             <!-- 目录 -->
@@ -156,7 +156,7 @@
                     android:layout_width="28dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="目录" />
+                    android:text="@string/book_catalog" />
 
                 <TextView
                     android:id="@+id/frag_book_last_chapter"
@@ -164,14 +164,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="共537章" />
+                    android:ellipsize="end"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/frag_book_updated_date"
-                    android:layout_width="50dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|end"
-                    android:text="已完结" />
+                    android:text="" />
 
                 <TextView
                     android:layout_width="10dp"

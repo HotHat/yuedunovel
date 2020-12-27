@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.api.BookApi
+import com.lyhux.yuedunovel.data.http.ChapterItemBean
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,20 +30,21 @@ class BookChapterFragment : Fragment(), KoinComponent {
 
     private var bookId: String? = null
     private val bookApi: BookApi by inject()
-    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adapter: ArrayAdapter<ChapterItemBean>
 
-    private lateinit var listItems: List<String>
+    private lateinit var listItems: List<ChapterItemBean>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             bookId = it.getString(ARG_PARAM1)
-            bookId?.let { it1 -> Log.e(TAG, it1) };
         }
 
+        Log.e(TAG, bookId ?: "Can't get bookId in chapter fragment")
 
 
-        listItems = arrayListOf("item1", "item2", "item3", "item4", "item5")
+
+        listItems = arrayListOf()
 
 
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItems)
@@ -65,7 +67,7 @@ class BookChapterFragment : Fragment(), KoinComponent {
 
     }
 
-    private suspend fun notify(items: List<String>) {
+    private suspend fun notify(items: List<ChapterItemBean>) {
         withContext(Main) {
             adapter.clear()
             adapter.addAll(items)
@@ -84,10 +86,10 @@ class BookChapterFragment : Fragment(), KoinComponent {
         listView.adapter = adapter
 
         listView.setOnItemClickListener { adapterView, view, i, l ->
-            val chapterId = adapterView.getItemAtPosition(i) as String
+            val chapterItem = adapterView.getItemAtPosition(i) as ChapterItemBean
             view.findNavController().navigate(R.id.nav_read_fragment, Bundle().apply {
                 putString("book_id", bookId)
-                putString("chapter_id", chapterId)
+                putString("chapter_id", chapterItem.chapterId)
             })
 
         }

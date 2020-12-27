@@ -28,23 +28,23 @@ class BookActivity : AppCompatActivity() {
         //
         // navController.navInflater
     }
-    @SuppressLint("ResourceType")
-    override fun finish() {
-        val curTime = System.currentTimeMillis()
-        if (curTime - lastBackTime > 2000) {
-            lastBackTime = curTime
-            val typeValue = TypedValue().apply {
-                ActivityUtils.getTopActivity()
-                        .theme.resolveAttribute(R.attr.colorPrimary, this, true)
-            }
-
-            SnackbarUtils.with(window.decorView)
-                    .setMessage("再次返回退出")
-                    .setBgResource(R.color.colorPrimary)
-                    // .setMessageColor()
-                    .show()
-        } else {
-            super.finish()
-        }
-    }
+    // @SuppressLint("ResourceType")
+    // override fun finish() {
+        // val curTime = System.currentTimeMillis()
+        // if (curTime - lastBackTime > 2000) {
+        //     lastBackTime = curTime
+        //     val typeValue = TypedValue().apply {
+        //         ActivityUtils.getTopActivity()
+        //                 .theme.resolveAttribute(R.attr.colorPrimary, this, true)
+        //     }
+        //
+        //     SnackbarUtils.with(window.decorView)
+        //             .setMessage("再次返回退出")
+        //             .setBgResource(R.color.colorPrimary)
+        //             // .setMessageColor()
+        //             .show()
+        // } else {
+        //     super.finish()
+        // }
+    // }
 }

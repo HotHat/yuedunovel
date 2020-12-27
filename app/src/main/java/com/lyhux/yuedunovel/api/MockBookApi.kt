@@ -35,7 +35,8 @@ class MockBookApi : BookApi {
                         popularCount = "100人气"
                         wordsCount = "100万字"
                         bookDesc = "这里是很长很长的文字描述"
-                        status = "某某分类|连载中"
+                        bookStatus = "某某分类|连载中"
+                        lastChapter = "最新一章标题"
                     }
             )
         }
@@ -76,12 +77,17 @@ class MockBookApi : BookApi {
         }
     }
 
-    override fun bookChapterListAsync(id: String): Deferred<ApiResponse<List<String>>> {
+    override fun bookChapterListAsync(id: String): Deferred<ApiResponse<List<ChapterItemBean>>> {
         return GlobalScope.async {
-            ApiResponse<List<String>>(1,
+            ApiResponse<List<ChapterItemBean>>(1,
                     "操作成功",
 
-                    listOf("item 1", "item 2 ", "list", "android", "item 3", "foobar", "bar")
+                    listOf(
+                            ChapterItemBean("00001", "00001", "s标题1"),
+                            ChapterItemBean("00001", "00002", "s标题2"),
+                            ChapterItemBean("00001", "00003", "s标题3"),
+                            ChapterItemBean("00001", "00004", "s标题4")
+                    )
             )
         }
     }

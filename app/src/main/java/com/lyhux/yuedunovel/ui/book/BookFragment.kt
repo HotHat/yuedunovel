@@ -25,6 +25,9 @@ private const val BOOK_ID = "book_id"
 class BookFragment : Fragment() {
     private var bookId: String? = null
     private val bookViewModel: BookViewModel by inject()
+    private var rootView: View? = null
+
+
 
     private lateinit var bookCoverView: ImageView
     private lateinit var bookAuthorView: TextView
@@ -50,8 +53,8 @@ class BookFragment : Fragment() {
             requireActivity().finish()
         }
 
-        bookViewModel.getDetail()
         val ctx = requireContext()
+        Log.e(TAG, "run once in onCreate")
 
         bookViewModel.response.observe(this, Observer {
             it.doSuccess {bookDetail ->
@@ -80,14 +83,22 @@ class BookFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_book, container, false)
+        if (rootView == null) {
+            Log.e(TAG, "run once in onCreateView")
+            rootView = inflater.inflate(R.layout.fragment_book, container, false)
+            bookViewModel.getDetail()
+        } else {
+            Log.e(TAG, "run old view in onCreateView")
+        }
+        return rootView
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val chapter = view.findViewById<LinearLayout>(R.id.fg_book_detail_chapter)
         chapter.setOnClickListener {
-            val action =
-            view.findNavController().navigate(R.id.nav_graph_book_chapter_fragment, Bundle().apply {
-                putString(BOOK_ID, bookId)
-            })
+                view.findNavController().navigate(R.id.nav_graph_book_chapter_fragment, Bundle().apply {
+                    putString(BOOK_ID, bookId)
+                })
         }
 
         bookCoverView = view.findViewById(R.id.frag_book_cover)
@@ -101,7 +112,6 @@ class BookFragment : Fragment() {
         bookLastChapterView = view.findViewById(R.id.frag_book_last_chapter)
         bookUpdateDateView = view.findViewById(R.id.frag_book_updated_date)
 
-        return view
     }
 
     companion object {

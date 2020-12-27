@@ -12,4 +12,8 @@ data class ChapterItemBean(
         @SerializedName("chapter_id")
         var chapterId: String,
         var title: String
-)
+) {
+        override fun toString(): String {
+            return title
+        }
+}
