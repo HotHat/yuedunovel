@@ -9,7 +9,7 @@ interface BookshelfDao {
     // fun update(now: String)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(record: BookshelfBean)
+    fun addBookshelf(bookshelf: BookshelfBean)
 
     @Query("Select * from bookshelf order by created_at desc")
     fun getAll() : List<BookshelfBean>

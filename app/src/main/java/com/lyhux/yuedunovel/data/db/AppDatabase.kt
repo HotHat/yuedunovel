@@ -21,7 +21,7 @@ import com.lyhux.yuedunovel.data.BookBean
 abstract class AppDatabase : RoomDatabase() {
 
     // abstract fun bookTypeDao(): BookTypeDao
-    abstract fun bookRecordDao(): ReadingRecordDao
+    abstract fun readingRecordDao(): ReadingRecordDao
     abstract fun bookDao(): BookDao
     abstract fun bookShelfDao(): BookshelfDao
 

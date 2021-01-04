@@ -1,7 +1,6 @@
 package com.lyhux.yuedunovel.data.db
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.*
 
 /**
  * @author Zsc
@@ -11,7 +10,19 @@ import androidx.room.Query
 @Dao
 interface ReadingRecordDao:BaseDao<ReadingRecordBean> {
 
-    @Query("SELECT * FROM book_record")
+    @Query("SELECT * FROM book_reading_record")
     fun getAll(): List<ReadingRecordBean>
 
+
+    @Query("SELECT * FROM book_reading_record WHERE book_id= :bookId")
+    fun findByBookId(bookId: String): ReadingRecordBean?
+
+    @Update
+    fun updateRecord(record: ReadingRecordBean)
+
+    @Delete
+    fun deleteRecord(record: ReadingRecordBean)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addReadingRecord(record: ReadingRecordBean)
 }

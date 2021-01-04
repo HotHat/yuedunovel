@@ -19,7 +19,7 @@ object BookshelfRepository : KoinComponent {
 
     suspend fun insert(bookshelfBean: BookshelfBean) {
         return withContext(Dispatchers.IO) {
-            bookshelfDao.insert(bookshelfBean)
+            bookshelfDao.addBookshelf(bookshelfBean)
         }
     }
 
