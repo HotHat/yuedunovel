@@ -11,18 +11,18 @@ import java.util.*
  * 阅读书架(收藏) fixme 不属于控件必须要的
  */
 @Entity(tableName = "bookshelf")
-class BookshelfBean {
+class BookshelfBean: BaseRecord {
     //所属的书的id
     @PrimaryKey
     @ColumnInfo(name="book_id")
-    var bookId: String = ""
+    override var bookId: String = ""
     // 标题
     @ColumnInfo(name="title")
-    var bookTitle: String = ""
+    override var bookTitle: String = ""
 
     // 封面
     @ColumnInfo(name="book_cover")
-    var bookCover: String = ""
+    override var bookCover: String = ""
 
     @ColumnInfo(name="created_at")
     @TypeConverters(Converters::class)

@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ReadingRecordRepository: KoinComponent {
+object ReadingRecordRepository: KoinComponent {
 
     private val readingRecordDao: ReadingRecordDao by inject()
 

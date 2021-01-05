@@ -11,6 +11,9 @@ interface BookshelfDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addBookshelf(bookshelf: BookshelfBean)
 
+    @Query("Select * from bookshelf where book_id=:bookId")
+    fun findByBookId(bookId: String): BookshelfBean?
+
     @Query("Select * from bookshelf order by created_at desc")
     fun getAll() : List<BookshelfBean>
 

@@ -23,6 +23,12 @@ object BookshelfRepository : KoinComponent {
         }
     }
 
+    suspend fun findByBookId(bookId: String): BookshelfBean? {
+        return withContext(Dispatchers.IO) {
+            bookshelfDao.findByBookId(bookId)
+        }
+    }
+
     suspend fun delete(bookBean: BookshelfBean) {
         return withContext(Dispatchers.IO) {
             bookshelfDao.delete(bookBean)

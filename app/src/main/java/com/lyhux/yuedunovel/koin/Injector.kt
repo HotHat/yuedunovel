@@ -3,6 +3,7 @@ package com.lyhux.yuedunovel.koin
 import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.api.MockBookApi
 import com.lyhux.yuedunovel.data.db.AppDatabase
+import com.lyhux.yuedunovel.data.repository.BookshelfRepository
 import com.lyhux.yuedunovel.ui.book.BookViewModel
 import com.lyhux.yuedunovel.ui.library.LibraryFragmentModel
 import com.lyhux.yuedunovel.ui.login.LoginViewModel

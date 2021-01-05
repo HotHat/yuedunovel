@@ -6,9 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BaseRecord
 import com.lyhux.yuedunovel.data.db.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfDao
+import com.lyhux.yuedunovel.data.http.ApiResponse
+import com.lyhux.yuedunovel.data.http.BookDetailBean
+import com.lyhux.yuedunovel.data.repository.BookshelfRepository
+import com.lyhux.yuedunovel.koin.Injector
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.android.ext.android.inject
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +39,7 @@ class BookFragment: Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val liveData: MutableLiveData<List<BookshelfBean>> = MutableLiveData()
 
     private  lateinit var gridView: GridView
 
@@ -43,10 +57,10 @@ class BookFragment: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view : View = inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
+        return inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
 
-        gridView = view.findViewById(R.id.fg_book_grid_view)
 
+        /*
         // val recordList = arrayListOf<BaseRecord>(BookshelfBean().apply {
         //     bookId = "a1234"
         //     bookTitle = "测试1"
@@ -81,11 +95,31 @@ class BookFragment: Fragment() {
         //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
         // }
         // )
-        // val adapter = BookListAdapter(requireContext(), recordList)
+       */
 
-        // gridView.adapter = adapter
+        // return view
+    }
 
-        return view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        gridView = view.findViewById(R.id.fg_book_grid_view)
+
+        liveData.observe(viewLifecycleOwner, Observer {
+            val adapter = BookListAdapter(requireContext(), it)
+            gridView.adapter =  adapter
+        })
+
+        addAdapter()
+    }
+
+    private fun addAdapter() {
+        GlobalScope.launch {
+            val bookshelfList = BookshelfRepository.getAll()
+
+            liveData.postValue(bookshelfList)
+
+        }
     }
 
     companion object {

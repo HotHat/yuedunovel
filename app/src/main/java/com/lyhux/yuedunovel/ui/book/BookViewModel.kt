@@ -7,17 +7,24 @@ import androidx.lifecycle.viewModelScope
 import com.lyhux.yuedunovel.api.BookApi
 import com.lyhux.yuedunovel.api.LoginParams
 import com.lyhux.yuedunovel.data.BookBean
+import com.lyhux.yuedunovel.data.db.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfDao
 import com.lyhux.yuedunovel.data.http.ApiResponse
 import com.lyhux.yuedunovel.data.http.BookDetailBean
+import com.lyhux.yuedunovel.data.repository.BookshelfRepository
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.util.*
 
 class BookViewModel : ViewModel(), KoinComponent {
 
     private val bookApi: BookApi by inject()
 
     val response: MutableLiveData<ApiResponse<BookDetailBean>> = MutableLiveData()
+    val bookshelfLiveData: MutableLiveData<BookshelfBean?> = MutableLiveData()
 
     fun getDetail() {
 
@@ -42,6 +49,19 @@ class BookViewModel : ViewModel(), KoinComponent {
 
 
 
+        }
+    }
+
+    fun findByBookId(bookId: String) {
+        GlobalScope.launch {
+            val bookshelfBean = BookshelfRepository.findByBookId(bookId)
+            bookshelfLiveData.postValue(bookshelfBean)
+        }
+    }
+
+    fun addBookshelf(bean: BookshelfBean) {
+        GlobalScope.launch {
+            BookshelfRepository.insert(bean)
         }
     }
 

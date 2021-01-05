@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,7 +14,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.data.db.BookshelfBean
+import com.lyhux.yuedunovel.data.db.BookshelfDao
+import com.lyhux.yuedunovel.data.http.BookDetailBean
+import com.lyhux.yuedunovel.data.repository.BookshelfRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.util.*
 
 private const val BOOK_ID = "book_id"
 
@@ -27,7 +35,7 @@ class BookFragment : Fragment() {
     private val bookViewModel: BookViewModel by inject()
     private var rootView: View? = null
 
-
+    private var bookshelfBean: BookshelfBean? = null
 
     private lateinit var bookCoverView: ImageView
     private lateinit var bookAuthorView: TextView
@@ -39,6 +47,9 @@ class BookFragment : Fragment() {
     private lateinit var bookDescView: TextView
     private lateinit var bookLastChapterView: TextView
     private lateinit var bookUpdateDateView: TextView
+
+    private lateinit var addBookshelfView: Button
+    private lateinit var readView: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,10 +84,29 @@ class BookFragment : Fragment() {
                         .load(bookDetail.bookCover)
                         .placeholder(R.drawable.book_shelf_search)
                         .into(bookCoverView);
+
+
+                bookViewModel.findByBookId(bookDetail.bookId)
+
+                bookshelfBean = BookshelfBean().apply {
+                    bookId = bookDetail.bookId
+                    bookTitle = bookDetail.bookName
+                    bookCover = bookDetail.bookCover
+                    bookTime = Date()
+                }
+
             }
             .doError {
 
             }
+        })
+
+        bookViewModel.bookshelfLiveData.observe(this, Observer {
+            if (it == null && bookshelfBean != null) {
+                bookViewModel.addBookshelf(bookshelfBean!!)
+            }
+            addBookshelfView.text = "已加入书架"
+            addBookshelfView.isClickable = false
         })
     }
 
@@ -111,6 +141,11 @@ class BookFragment : Fragment() {
         wordsCountView = view.findViewById(R.id.frag_book_words_count)
         bookLastChapterView = view.findViewById(R.id.frag_book_last_chapter)
         bookUpdateDateView = view.findViewById(R.id.frag_book_updated_date)
+
+        addBookshelfView = view.findViewById(R.id.frag_book_add_bookshelf)
+        readView = view.findViewById(R.id.frag_book_read)
+
+
 
     }
 

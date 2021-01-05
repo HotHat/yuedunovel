@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Set;
 
 import javax.crypto.Mac;
@@ -123,5 +124,6 @@ public class ExampleUnitTest {
     @Test
     public void libraryPortalAsync() {
         System.out.println("Hello world");
+        System.out.println(new Date());
     }
 }
