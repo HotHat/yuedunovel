@@ -80,7 +80,7 @@ class StoreCategoryBlockView : LinearLayout {
                 // setImimg.setIm(item.imageUrl)
                 Glide.with(context)
                         .load(item.imageUrl)
-                        .placeholder(R.drawable.book_shelf_search)
+                        .placeholder(R.drawable.ic_bookshelf_search)
                         .into(img);
                 title.text = item.title
                 img.setOnClickListener {

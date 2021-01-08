@@ -15,11 +15,6 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.db.BookshelfBean
-import com.lyhux.yuedunovel.data.db.BookshelfDao
-import com.lyhux.yuedunovel.data.http.BookDetailBean
-import com.lyhux.yuedunovel.data.repository.BookshelfRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -82,7 +77,7 @@ class BookFragment : Fragment() {
                 // 封面
                 Glide.with(ctx)
                         .load(bookDetail.bookCover)
-                        .placeholder(R.drawable.book_shelf_search)
+                        .placeholder(R.drawable.ic_bookshelf_search)
                         .into(bookCoverView);
 
 

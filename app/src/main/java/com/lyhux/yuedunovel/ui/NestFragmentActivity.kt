@@ -3,8 +3,10 @@ package com.lyhux.yuedunovel.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.SnackbarUtils
@@ -21,10 +23,16 @@ class NestFragmentActivity : AppCompatActivity() {
 
     private lateinit var fragmentList: ArrayList<Fragment>
     private lateinit var currentFragment: Fragment
+    private lateinit var deleteBar: LinearLayout
+    private lateinit var navBar: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nest_fragment)
+
+        // 初始化
+        deleteBar = findViewById(R.id.nest_frag_sel)
+        navBar = findViewById(R.id.bottom_navigation)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val w: Window = window
@@ -85,6 +93,16 @@ class NestFragmentActivity : AppCompatActivity() {
 
             true
 
+        }
+    }
+
+    fun triggerNavBar(show: Boolean) {
+        if (show) {
+            navBar.visibility = View.VISIBLE
+            deleteBar.visibility = View.GONE
+        } else {
+            navBar.visibility = View.GONE
+            deleteBar.visibility = View.VISIBLE
         }
     }
 

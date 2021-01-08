@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.ui.login.LoginActivity
-import kotlin.math.log
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,19 +46,19 @@ class AccountFragment : Fragment() {
         listView = view.findViewById(R.id.setting_list)
 
         val items = arrayListOf<SettingItem>(
-                SettingItem(R.drawable.book_shelf_search, "福利中心") { it ->
+                SettingItem(R.drawable.ic_bookshelf_search, "福利中心") { it ->
                     Toast.makeText(it, "AAAA", Toast.LENGTH_SHORT).show()
                 },
-                SettingItem(R.drawable.book_shelf_search, "消息中心"){ it ->
+                SettingItem(R.drawable.ic_bookshelf_search, "消息中心"){ it ->
                     Toast.makeText(it, "BBB", Toast.LENGTH_SHORT).show()
                 },
-                SettingItem(R.drawable.book_shelf_search, "充值记录"){ it ->
+                SettingItem(R.drawable.ic_bookshelf_search, "充值记录"){ it ->
                     Toast.makeText(it, "CCC", Toast.LENGTH_SHORT).show()
                 },
-                SettingItem(R.drawable.book_shelf_search, "订阅记录"){ it ->
+                SettingItem(R.drawable.ic_bookshelf_search, "订阅记录"){ it ->
                     Toast.makeText(it, "DDD", Toast.LENGTH_SHORT).show()
                 },
-                SettingItem(R.drawable.book_shelf_search, "我读过的书"){ it ->
+                SettingItem(R.drawable.ic_bookshelf_search, "我读过的书"){ it ->
                     Toast.makeText(it, "EEEE", Toast.LENGTH_SHORT).show()
                 }
         )

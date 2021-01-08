@@ -13,33 +13,65 @@
         android:layout_width="fill_parent"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="24dp"
-        app:menu="@menu/book_shelf"
         app:title="@null"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/toolbar_bookshelf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/bookshelf"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/toolbar_bookshelf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/bookshelf"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/toolbar_reading_log"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/reading_record"
+                    android:textColor="@color/colorRed"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/toolbar_reading_log"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:text="@string/reading_record"
-                android:textColor="@color/colorRed"
-                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/frag_bookshelf_toolbar"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/frag_bookshelf_sign"
+                    android:layout_width="50dp"
+                    android:layout_height="33dp"
+                    android:src="@drawable/ic_bookshelf_sign" />
+
+                <ImageView
+                    android:id="@+id/frag_bookshelf_search"
+                    android:layout_width="50dp"
+                    android:layout_height="33dp"
+                    android:src="@drawable/ic_bookshelf_search" />
+
+                <ImageView
+                    android:id="@+id/frag_bookshelf_edit"
+                    android:layout_width="50dp"
+                    android:layout_height="33dp"
+                    android:src="@drawable/ic_bookshelf_edit" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
 
 
     </androidx.appcompat.widget.Toolbar>

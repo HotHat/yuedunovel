@@ -3,18 +3,25 @@ package com.lyhux.yuedunovel.ui.bookshelf
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.lyhux.yuedunovel.R
+import com.lyhux.yuedunovel.ui.NestFragmentActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +42,9 @@ class BookshelfFragment : Fragment() {
     private var TEXT_SMALL_SIZE: Float = 0F
     private var COLOR_RED: Int = 0
     private var COLOR_BLACK: Int = 0
+    private var editStatus = false
+
+    // private val
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +59,15 @@ class BookshelfFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.e(TAG, "create view")
+        return inflater.inflate(R.layout.fragment_bookshelf, container, false)
+    }
+
+    @SuppressLint("ClickableViewAccessibility", "UseCompatLoadingForDrawables")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.e(TAG, "view created")
+
+        // Inflate the layout for this fragment
         TEXT_BIG_SIZE =  resources.getDimension(R.dimen.bookshelf_big)
         TEXT_SMALL_SIZE = resources.getDimension(R.dimen.bookshelf_small)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -59,20 +78,45 @@ class BookshelfFragment : Fragment() {
             COLOR_BLACK = resources.getColor(R.color.colorBlack)
         }
 
-        val view = inflater.inflate(R.layout.fragment_bookshelf, container, false)
 
         val viewPage = view.findViewById<ViewPager2>(R.id.view_page)
 
         val toolbar  = view.findViewById<Toolbar>(R.id.tool_bar)
+        val activity = requireActivity() as NestFragmentActivity
+        if (activity.actionBar != null) {
+            activity.actionBar?.hide()
+        } else {
+            activity.setSupportActionBar(toolbar)
+        }
 
         val adapter = ViewPagerAdapter(childFragmentManager, this.lifecycle, toolbar)
         adapter.addFrag(BookFragment.newInstance(), "first Inner fragment")
         adapter.addFrag(RecordFragment.newInstance(), "second Inner fragment")
 
+        val edit = toolbar.findViewById<ImageView>(R.id.frag_bookshelf_edit)
+        edit.setOnClickListener {
+           activity.triggerNavBar(editStatus)
+            editStatus = !editStatus
+        }
+
+        toolbar.setOnTouchListener { view, motionEvent ->
+            view.findViewById<LinearLayout>(R.id.frag_bookshelf_toolbar).dispatchTouchEvent(motionEvent)}
+
         viewPage.adapter = adapter
 
-        return view
+        super.onViewCreated(view, savedInstanceState)
     }
+
+    // 菜单项被选择事件
+    // override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    //     Log.e(TAG, "menu click")
+    //     when (item.itemId) {
+    //         R.id.menu_book_sign -> Toast.makeText(requireContext(), "删除菜单被点击了", Toast.LENGTH_LONG).show()
+    //         R.id.menu_book_shelf_search -> Toast.makeText(requireContext(), "保存菜单被点击了", Toast.LENGTH_LONG).show()
+    //         R.id.menu_book_shelf_manager -> Toast.makeText(requireContext(), "帮助菜单被点击了", Toast.LENGTH_LONG).show()
+    //     }
+    //     return true
+    // }
 
     internal inner class ViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle, toolbar: Toolbar) :
             FragmentStateAdapter(manager, lifecycle) {
@@ -137,6 +181,7 @@ class BookshelfFragment : Fragment() {
          * @return A new instance of fragment FragmentAlarm.
          */
         // TODO: Rename and change types and number of parameters
+        const val TAG = "bookshelf_fragment"
         @JvmStatic
         fun newInstance() =
                 BookshelfFragment().apply {

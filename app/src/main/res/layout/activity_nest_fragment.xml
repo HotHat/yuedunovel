@@ -18,7 +18,8 @@
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/act_nest_frag_sel"
+        android:visibility="gone"
+        android:id="@+id/nest_frag_sel"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 

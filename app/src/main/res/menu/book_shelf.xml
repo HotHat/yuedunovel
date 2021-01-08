@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:icon="@drawable/book_sigin" android:id="@+id/book_sigin" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/sigin_text" app:showAsAction="always" />
-    <item android:icon="@drawable/book_shelf_search" android:id="@+id/book_shelf_search" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/setting" app:showAsAction="always" />
-    <item android:icon="@drawable/ic_shelf_newedit" android:id="@+id/book_shelf_manager" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/bookshelf_manager" app:showAsAction="always" />
+    <item android:icon="@drawable/ic_bookshelf_sign" android:id="@+id/menu_book_sign" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/sigin_text" app:showAsAction="always" />
+    <item android:icon="@drawable/ic_bookshelf_search" android:id="@+id/menu_book_shelf_search" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/setting" app:showAsAction="always" />
+    <item android:icon="@drawable/ic_bookshelf_edit" android:id="@+id/menu_book_shelf_manager" android:layout_width="16.0dip" android:layout_height="16.0dip" android:title="@string/bookshelf_manager" app:showAsAction="always" />
 </menu>

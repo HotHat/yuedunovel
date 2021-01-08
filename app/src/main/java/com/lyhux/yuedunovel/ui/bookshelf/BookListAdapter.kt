@@ -22,7 +22,7 @@ class BookListAdapter(private var context: Context, private var recordList: List
             val imageView = view.findViewById<ImageView>(R.id.fg_bookshelf_item_img)
             Glide.with(context)
                     .load(item.bookCover)
-                    .placeholder(R.drawable.book_shelf_search)
+                    .placeholder(R.drawable.ic_bookshelf_search)
                     .into(imageView);
 
             val title = view.findViewById<TextView>(R.id.fg_bookshelf_item_title)
