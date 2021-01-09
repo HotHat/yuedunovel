@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.RadioButton
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BaseRecord
 
 class BookListAdapter(private var context: Context, private var recordList: List<BaseRecord>) : BaseAdapter() {
+
+    private var isSelectMode = false
 
     override fun getView(pos: Int, contentView: View?, parent: ViewGroup?): View {
         val item = recordList[pos]
@@ -29,7 +32,29 @@ class BookListAdapter(private var context: Context, private var recordList: List
 
             title.text = item.bookTitle
 
+            val mask = view.findViewById<View>(R.id.fg_item_overlay)
+            val sel = view.findViewById<RadioButton>(R.id.fg_item_sel)
+
+            if (isSelectMode) {
+                mask.visibility = View.VISIBLE
+                sel.visibility = View.VISIBLE
+            } else {
+                mask.visibility = View.GONE
+                sel.visibility = View.GONE
+            }
+
             return view
+        } else {
+            val mask = contentView.findViewById<View>(R.id.fg_item_overlay)
+            val sel = contentView.findViewById<RadioButton>(R.id.fg_item_sel)
+
+            if (isSelectMode) {
+                mask.visibility = View.VISIBLE
+                sel.visibility = View.VISIBLE
+            } else {
+                mask.visibility = View.GONE
+                sel.visibility = View.GONE
+            }
         }
 
         return contentView
@@ -45,6 +70,11 @@ class BookListAdapter(private var context: Context, private var recordList: List
 
     override fun getCount(): Int {
         return recordList.size
+    }
+
+
+    fun setMode(isSelectMode: Boolean) {
+        this.isSelectMode = isSelectMode
     }
 
 }

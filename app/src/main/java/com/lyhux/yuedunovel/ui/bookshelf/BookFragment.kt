@@ -34,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FragmentAlarm.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BookFragment: Fragment() {
+class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,6 +42,7 @@ class BookFragment: Fragment() {
     private val liveData: MutableLiveData<List<BookshelfBean>> = MutableLiveData()
 
     private  lateinit var gridView: GridView
+    private var mAdapter: BookListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,12 +106,21 @@ class BookFragment: Fragment() {
 
         gridView = view.findViewById(R.id.fg_book_grid_view)
 
+        gridView.setOnItemClickListener { adapterView, view, pos, l ->
+
+        }
+
         liveData.observe(viewLifecycleOwner, Observer {
-            val adapter = BookListAdapter(requireContext(), it)
-            gridView.adapter =  adapter
+            mAdapter = BookListAdapter(requireContext(), it)
+            gridView.adapter = mAdapter
         })
 
         addAdapter()
+    }
+
+    override fun setEditMode(isEditMode: Boolean) {
+        mAdapter?.setMode(isEditMode)
+        mAdapter?.notifyDataSetChanged()
     }
 
     private fun addAdapter() {

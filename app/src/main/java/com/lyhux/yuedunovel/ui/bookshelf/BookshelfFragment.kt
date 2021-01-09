@@ -6,14 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -42,7 +39,9 @@ class BookshelfFragment : Fragment() {
     private var TEXT_SMALL_SIZE: Float = 0F
     private var COLOR_RED: Int = 0
     private var COLOR_BLACK: Int = 0
-    private var editStatus = false
+    private var isEditMode = false
+
+    private lateinit var mViewPage: ViewPager2
 
     // private val
 
@@ -79,7 +78,7 @@ class BookshelfFragment : Fragment() {
         }
 
 
-        val viewPage = view.findViewById<ViewPager2>(R.id.view_page)
+        mViewPage = view.findViewById<ViewPager2>(R.id.view_page)
 
         val toolbar  = view.findViewById<Toolbar>(R.id.tool_bar)
         val activity = requireActivity() as NestFragmentActivity
@@ -95,18 +94,27 @@ class BookshelfFragment : Fragment() {
 
         val edit = toolbar.findViewById<ImageView>(R.id.frag_bookshelf_edit)
         edit.setOnClickListener {
-           activity.triggerNavBar(editStatus)
-            editStatus = !editStatus
+            activity.triggerNavBar(isEditMode)
+            isEditMode = !isEditMode
+
+            editOnClick(isEditMode)
         }
 
         toolbar.setOnTouchListener { view, motionEvent ->
             view.findViewById<LinearLayout>(R.id.frag_bookshelf_toolbar).dispatchTouchEvent(motionEvent)}
 
-        viewPage.adapter = adapter
+        mViewPage.adapter = adapter
 
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun editOnClick(isEditMode: Boolean) {
+        val adapter = mViewPage.adapter as ViewPagerAdapter
+        val cur = adapter.createFragment(mViewPage.currentItem) as EditableFragment
+
+        cur.setEditMode(isEditMode)
+
+    }
     // 菜单项被选择事件
     // override fun onOptionsItemSelected(item: MenuItem): Boolean {
     //     Log.e(TAG, "menu click")
@@ -121,8 +129,8 @@ class BookshelfFragment : Fragment() {
     internal inner class ViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle, toolbar: Toolbar) :
             FragmentStateAdapter(manager, lifecycle) {
 
-        private val shelf: TextView = toolbar.findViewById<TextView>(R.id.toolbar_bookshelf)
-        private val log: TextView = toolbar.findViewById<TextView>(R.id.toolbar_reading_log)
+        private val shelf: TextView = toolbar.findViewById(R.id.toolbar_bookshelf)
+        private val log: TextView = toolbar.findViewById(R.id.toolbar_reading_log)
 
         //        val bigSize = text;
 
@@ -190,5 +198,10 @@ class BookshelfFragment : Fragment() {
                         // putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+
+    interface EditableFragment {
+        fun setEditMode(isEditMode: Boolean)
     }
 }

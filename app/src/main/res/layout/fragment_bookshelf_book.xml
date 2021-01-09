@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:paddingTop="10dp"
         android:background="#C8E8A3"
-        android:columnWidth="100dp"
+        android:columnWidth="115dp"
         android:gravity="center"
         android:horizontalSpacing="0dp"
         android:numColumns="auto_fit"
