@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -105,6 +106,7 @@ class BookshelfFragment : Fragment() {
 
         mViewPage.adapter = adapter
 
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -113,18 +115,7 @@ class BookshelfFragment : Fragment() {
         val cur = adapter.createFragment(mViewPage.currentItem) as EditableFragment
 
         cur.setEditMode(isEditMode)
-
     }
-    // 菜单项被选择事件
-    // override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    //     Log.e(TAG, "menu click")
-    //     when (item.itemId) {
-    //         R.id.menu_book_sign -> Toast.makeText(requireContext(), "删除菜单被点击了", Toast.LENGTH_LONG).show()
-    //         R.id.menu_book_shelf_search -> Toast.makeText(requireContext(), "保存菜单被点击了", Toast.LENGTH_LONG).show()
-    //         R.id.menu_book_shelf_manager -> Toast.makeText(requireContext(), "帮助菜单被点击了", Toast.LENGTH_LONG).show()
-    //     }
-    //     return true
-    // }
 
     internal inner class ViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle, toolbar: Toolbar) :
             FragmentStateAdapter(manager, lifecycle) {
@@ -164,17 +155,6 @@ class BookshelfFragment : Fragment() {
                 shelf.setTextColor(COLOR_BLACK)
             }
 
-            //            if (position == 0) {
-            //                shelf.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.0F)
-            //                shelf.setTextColor(Color.parseColor("#FF0000"))
-            //                log.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20.0F)
-            //                log.setTextColor(Color.parseColor("#000000"))
-            //            } else {
-            //                log.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.0F)
-            //                log.setTextColor(Color.parseColor("#FF0000"))
-            //                shelf.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20.0F)
-            //                shelf.setTextColor(Color.parseColor("#000000"))
-            //            }
             return super.getItemId(position)
         }
     }
@@ -203,5 +183,7 @@ class BookshelfFragment : Fragment() {
 
     interface EditableFragment {
         fun setEditMode(isEditMode: Boolean)
+        fun selectAll()
+        fun cleanAll()
     }
 }

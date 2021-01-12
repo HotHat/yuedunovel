@@ -1,6 +1,7 @@
 package com.lyhux.yuedunovel.ui.bookshelf
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,59 +60,27 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
-
-
-        /*
-        // val recordList = arrayListOf<BaseRecord>(BookshelfBean().apply {
-        //     bookId = "a1234"
-        //     bookTitle = "测试1"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a12345"
-        //     bookTitle = "测试2"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a123456"
-        //     bookTitle = "测试3"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a1234567"
-        //     bookTitle = "测试4"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a1234567"
-        //     bookTitle = "测试5"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a1234567"
-        //     bookTitle = "测试6"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a1234567"
-        //     bookTitle = "测试7"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }, BookshelfBean().apply {
-        //     bookId = "a1234567"
-        //     bookTitle = "测试8"
-        //     bookCover = "https://lookimg.com/images/2020/09/17/P0OfQo.jpg"
-        // }
-        // )
-       */
-
-        // return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.e(TAG, "on view created")
+
         gridView = view.findViewById(R.id.fg_book_grid_view)
 
         gridView.setOnItemClickListener { adapterView, view, pos, l ->
 
+            val adapter = gridView.adapter as BookListAdapter
+            adapter.selectItem(pos)
+            Log.e(TAG, "$pos")
         }
 
         liveData.observe(viewLifecycleOwner, Observer {
-            mAdapter = BookListAdapter(requireContext(), it)
+            val items = it.map { bean ->
+                BookshelfItemBean(bean.bookId, bean.bookCover, bean.bookTitle, false)
+            }
+            mAdapter = BookListAdapter(requireContext(), items)
             gridView.adapter = mAdapter
         })
 
@@ -120,8 +89,16 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
 
     override fun setEditMode(isEditMode: Boolean) {
         mAdapter?.setMode(isEditMode)
-        mAdapter?.notifyDataSetChanged()
     }
+
+    override fun selectAll() {
+        mAdapter?.selectAll()
+    }
+
+    override fun cleanAll() {
+        mAdapter?.cleanAll()
+    }
+
 
     private fun addAdapter() {
         GlobalScope.launch {
@@ -133,15 +110,8 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentAlarm.
-         */
-        // TODO: Rename and change types and number of parameters
+
+        const val TAG = "BookFragment"
         @JvmStatic
         fun newInstance() =
             BookFragment().apply {

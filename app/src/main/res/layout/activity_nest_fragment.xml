@@ -30,7 +30,7 @@
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/radio_pirates"
+                android:id="@+id/act_nest_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorRed"
@@ -53,7 +53,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/bSearch"
+                android:id="@+id/act_nest_del"
                 android:layout_width="60dp"
                 android:layout_height="28dp"
                 android:background="@null"

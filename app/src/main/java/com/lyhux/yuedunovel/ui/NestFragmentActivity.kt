@@ -3,10 +3,13 @@ package com.lyhux.yuedunovel.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.SnackbarUtils
@@ -94,6 +97,16 @@ class NestFragmentActivity : AppCompatActivity() {
             true
 
         }
+
+        val selAllBtn = deleteBar.findViewById<RadioButton>(R.id.act_nest_select)
+        val delBtn = deleteBar.findViewById<Button>(R.id.act_nest_del)
+        selAllBtn.setOnClickListener {
+            Log.e(TAG, "select all radio button click")
+        }
+
+        delBtn.setOnClickListener {
+            Log.e(TAG, "delete button click")
+        }
     }
 
     fun triggerNavBar(show: Boolean) {
@@ -120,5 +133,8 @@ class NestFragmentActivity : AppCompatActivity() {
         }
     }
 
+    companion object {
+        const val TAG = "NestFragmentActivity"
+    }
 
 }

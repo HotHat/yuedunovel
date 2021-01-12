@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.BaseRecord
 
-class BookListAdapter(private var context: Context, private var recordList: List<BaseRecord>) : BaseAdapter() {
+class BookListAdapter(private var context: Context, private var recordList: List<BookshelfItemBean>) : BaseAdapter() {
 
     private var isSelectMode = false
 
@@ -42,6 +42,8 @@ class BookListAdapter(private var context: Context, private var recordList: List
                 mask.visibility = View.GONE
                 sel.visibility = View.GONE
             }
+            // 显示选中
+            sel.isChecked = item.isSelected
 
             return view
         } else {
@@ -55,6 +57,9 @@ class BookListAdapter(private var context: Context, private var recordList: List
                 mask.visibility = View.GONE
                 sel.visibility = View.GONE
             }
+
+            // 显示选中
+            sel.isChecked = item.isSelected
         }
 
         return contentView
@@ -72,9 +77,31 @@ class BookListAdapter(private var context: Context, private var recordList: List
         return recordList.size
     }
 
+    fun selectItem(pos: Int) {
+        if (isSelectMode) {
+            val it = recordList[pos]
+            it.isSelected = !it.isSelected
+            this.notifyDataSetChanged()
+        }
+    }
+
+    fun selectAll() {
+        for (it in recordList) {
+            it.isSelected = true
+        }
+        notifyDataSetChanged()
+    }
+
+    fun cleanAll() {
+        for (it in recordList) {
+            it.isSelected = false
+        }
+        notifyDataSetChanged()
+    }
 
     fun setMode(isSelectMode: Boolean) {
         this.isSelectMode = isSelectMode
+        this.notifyDataSetChanged()
     }
 
 }
