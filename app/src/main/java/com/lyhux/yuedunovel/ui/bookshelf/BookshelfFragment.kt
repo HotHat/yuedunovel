@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -31,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BookshelfFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BookshelfFragment : Fragment() {
+class BookshelfFragment : Fragment(), NestFragmentActivity.Editable {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,6 +42,7 @@ class BookshelfFragment : Fragment() {
     private var isEditMode = false
 
     private lateinit var mViewPage: ViewPager2
+    private lateinit var mAdapter: ViewPagerAdapter
 
     // private val
 
@@ -89,9 +89,9 @@ class BookshelfFragment : Fragment() {
             activity.setSupportActionBar(toolbar)
         }
 
-        val adapter = ViewPagerAdapter(childFragmentManager, this.lifecycle, toolbar)
-        adapter.addFrag(BookFragment.newInstance(), "first Inner fragment")
-        adapter.addFrag(RecordFragment.newInstance(), "second Inner fragment")
+        mAdapter = ViewPagerAdapter(childFragmentManager, this.lifecycle, toolbar)
+        mAdapter.addFrag(BookFragment.newInstance(), "first Inner fragment")
+        mAdapter.addFrag(RecordFragment.newInstance(), "second Inner fragment")
 
         val edit = toolbar.findViewById<ImageView>(R.id.frag_bookshelf_edit)
         edit.setOnClickListener {
@@ -104,7 +104,7 @@ class BookshelfFragment : Fragment() {
         toolbar.setOnTouchListener { view, motionEvent ->
             view.findViewById<LinearLayout>(R.id.frag_bookshelf_toolbar).dispatchTouchEvent(motionEvent)}
 
-        mViewPage.adapter = adapter
+        mViewPage.adapter = mAdapter
 
 
         super.onViewCreated(view, savedInstanceState)
@@ -180,10 +180,25 @@ class BookshelfFragment : Fragment() {
                 }
     }
 
+    override fun selectAll() {
+        val cur = mViewPage.currentItem
+        val frag = mAdapter.createFragment(cur) as NestFragmentActivity.Editable
+
+        frag.selectAll()
+    }
+
+    override fun cleanAll() {
+        val cur = mViewPage.currentItem
+        val frag = mAdapter.createFragment(cur) as NestFragmentActivity.Editable
+
+        frag.cleanAll()
+    }
+
+    override fun isSelectAll(): Boolean {
+        TODO("Not yet implemented")
+    }
 
     interface EditableFragment {
         fun setEditMode(isEditMode: Boolean)
-        fun selectAll()
-        fun cleanAll()
     }
 }

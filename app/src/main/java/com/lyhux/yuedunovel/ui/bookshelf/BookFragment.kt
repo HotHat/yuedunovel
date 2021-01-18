@@ -18,6 +18,7 @@ import com.lyhux.yuedunovel.data.http.ApiResponse
 import com.lyhux.yuedunovel.data.http.BookDetailBean
 import com.lyhux.yuedunovel.data.repository.BookshelfRepository
 import com.lyhux.yuedunovel.koin.Injector
+import com.lyhux.yuedunovel.ui.NestFragmentActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -35,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FragmentAlarm.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
+class BookFragment: Fragment(), BookshelfFragment.EditableFragment, NestFragmentActivity.Editable {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -74,6 +75,10 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
             val adapter = gridView.adapter as BookListAdapter
             adapter.selectItem(pos)
             Log.e(TAG, "$pos")
+
+            //
+            val activity = requireActivity() as NestFragmentActivity
+            activity.whenSelectAll(this.isSelectAll())
         }
 
         liveData.observe(viewLifecycleOwner, Observer {
@@ -97,6 +102,10 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment {
 
     override fun cleanAll() {
         mAdapter?.cleanAll()
+    }
+
+    override fun isSelectAll() : Boolean {
+        return mAdapter?.isSelectAll() ?: false
     }
 
 

@@ -28,6 +28,8 @@ class NestFragmentActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
     private lateinit var deleteBar: LinearLayout
     private lateinit var navBar: BottomNavigationView
+    private lateinit var selectAllBtn: RadioButton
+    private  var isSelectAll: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,15 +100,39 @@ class NestFragmentActivity : AppCompatActivity() {
 
         }
 
-        val selAllBtn = deleteBar.findViewById<RadioButton>(R.id.act_nest_select)
+        selectAllBtn = deleteBar.findViewById<RadioButton>(R.id.act_nest_select)
         val delBtn = deleteBar.findViewById<Button>(R.id.act_nest_del)
-        selAllBtn.setOnClickListener {
+        selectAllBtn.setOnClickListener {
             Log.e(TAG, "select all radio button click")
+            val itemId = bottomNavigationView.selectedItemId
+
+            if (itemId == R.id.btn_nag_bookshelf) {
+                Log.e(TAG, "select btn nag bookshelf" )
+            }
+
+            Log.e(TAG, "item id: $itemId" )
+            val firstFrag = fragmentList[0] as NestFragmentActivity.Editable
+            isSelectAll = !isSelectAll
+
+            if (isSelectAll) {
+                firstFrag.selectAll()
+            } else {
+                firstFrag.cleanAll()
+            }
+
+            selectAllBtn.isChecked = isSelectAll
+
+            Log.e(TAG, "select all button: ${selectAllBtn.isSelected}" )
+            Log.e(TAG, "select all button: ${selectAllBtn.isChecked}" )
         }
 
         delBtn.setOnClickListener {
             Log.e(TAG, "delete button click")
         }
+    }
+
+    fun whenSelectAll(isSelectAll: Boolean) {
+        selectAllBtn.isChecked = isSelectAll
     }
 
     fun triggerNavBar(show: Boolean) {
@@ -137,4 +163,9 @@ class NestFragmentActivity : AppCompatActivity() {
         const val TAG = "NestFragmentActivity"
     }
 
+    interface Editable{
+        fun selectAll()
+        fun cleanAll()
+        fun isSelectAll() : Boolean
+    }
 }

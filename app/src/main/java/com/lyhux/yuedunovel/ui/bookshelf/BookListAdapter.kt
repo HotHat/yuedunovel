@@ -92,6 +92,15 @@ class BookListAdapter(private var context: Context, private var recordList: List
         notifyDataSetChanged()
     }
 
+    // 是否已经全选
+    fun isSelectAll(): Boolean {
+        for (it in recordList) {
+            if (!it.isSelected)
+                return false
+        }
+        return true
+    }
+
     fun cleanAll() {
         for (it in recordList) {
             it.isSelected = false
