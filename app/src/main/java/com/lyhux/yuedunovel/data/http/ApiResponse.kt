@@ -8,11 +8,11 @@ data class ApiResponse<T> (
 
 ) {
     var isSuccess : Boolean = false
-        get() = code == 1
+        get() = code == 200
 
     fun doSuccess(r: (T) -> Unit): ApiResponse<T> {
         return apply {
-            if (code == 1) {
+            if (code == 200) {
                 r(data!!)
             }
         }
@@ -20,7 +20,7 @@ data class ApiResponse<T> (
 
     fun doError(e: (ApiResponse<T>) -> Unit): ApiResponse<T> {
         return apply {
-            if (code != 1) {
+            if (code != 200) {
                 e(this)
             }
         }

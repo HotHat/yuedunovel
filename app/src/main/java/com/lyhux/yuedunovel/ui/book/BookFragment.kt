@@ -111,7 +111,7 @@ class BookFragment : Fragment() {
         if (rootView == null) {
             Log.e(TAG, "run once in onCreateView")
             rootView = inflater.inflate(R.layout.fragment_book, container, false)
-            bookViewModel.getDetail()
+            bookViewModel.getDetail(bookId!!)
         } else {
             Log.e(TAG, "run old view in onCreateView")
         }

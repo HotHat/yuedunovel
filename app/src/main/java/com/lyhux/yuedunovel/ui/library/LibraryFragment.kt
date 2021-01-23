@@ -53,7 +53,7 @@ class LibraryFragment : Fragment() {
 
 
                 // 轮播图
-                var carouseList = it.carouse.map { item -> object:BaseBannerInfo{
+                var carouseList = it.carousel.map { item -> object:BaseBannerInfo{
                     override fun getXBannerUrl(): Any {
                         return item.image
                     }

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class LibraryBean(
-        var carouse: List<CarouseItem>,
+        var carousel: List<CarouseItem>,
         var category: List<String>,
         var block: List<BlockItem>
 

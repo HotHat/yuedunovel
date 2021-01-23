@@ -26,13 +26,13 @@ class BookViewModel : ViewModel(), KoinComponent {
     val response: MutableLiveData<ApiResponse<BookDetailBean>> = MutableLiveData()
     val bookshelfLiveData: MutableLiveData<BookshelfBean?> = MutableLiveData()
 
-    fun getDetail() {
+    fun getDetail(bookId: String) {
 
         viewModelScope.launch {
 
             try {
                 val result = bookApi.bookDetailAsync(
-                        "1"
+                        bookId
                 ).await()
 
                 Log.e(TAG, result.toString())

@@ -199,7 +199,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="加书架" />
+            android:text="加书架"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/frag_book_read"

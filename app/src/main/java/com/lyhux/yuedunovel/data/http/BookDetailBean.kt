@@ -4,38 +4,39 @@ import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-class BookDetailBean {
+data class BookDetailBean (
     @SerializedName("book_id")
-    var bookId: String = ""
+    var bookId: String = "",
     // 标题
     @SerializedName("name")
-    var bookName: String = ""
+    var bookName: String = "",
 
     // 封面
     @SerializedName("cover")
-    var bookCover: String = ""
+    var bookCover: String = "",
 
     @SerializedName("author")
-    var bookAuthor: String = ""
+    var bookAuthor: String = "",
 
-    var bookStatus: String = ""
+    @SerializedName("status")
+    var bookStatus: String = "",
 
-    @SerializedName("book_desc")
-    var bookDesc: String = ""
+    @SerializedName("description")
+    var bookDesc: String = "",
 
     @SerializedName("popular_count")
-    var popularCount: String = ""
+    var popularCount: String = "",
 
     @SerializedName("read_count")
-    var readCount: String = ""
+    var readCount: String = "",
 
     @SerializedName("words_count")
-    var wordsCount: String = ""
+    var wordsCount: String = "",
 
     @SerializedName("last_chapter")
-    var lastChapter: String = ""
+    var lastChapter: String = "",
 
     @SerializedName("updated_date")
     var updatedDate: String = ""
 
-}
+)

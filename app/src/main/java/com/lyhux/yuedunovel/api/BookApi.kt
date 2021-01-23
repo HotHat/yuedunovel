@@ -11,7 +11,7 @@ interface BookApi {
         const val BASE_URL = "http://192.168.33.10"
     }
 
-    @GET("/api/v1/book-detail?")
+    @GET("/api/v1/book-detail")
     fun bookDetailAsync(@Query("book_id") bookId: String): Deferred<ApiResponse<BookDetailBean>>
 
     @GET("/api/v1/library-portal")

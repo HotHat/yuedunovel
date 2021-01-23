@@ -50,7 +50,7 @@ class BookChapterFragment : Fragment(), KoinComponent {
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItems)
 
         GlobalScope.launch {
-            val response = bookApi.bookChapterListAsync("mock book id").await()
+            val response = bookApi.bookChapterListAsync(bookId!!).await()
 
             if (response.isSuccess) {
                 val items = response.data!!
