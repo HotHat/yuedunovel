@@ -1,5 +1,9 @@
 package com.lyhux.yuedunovel.ui.bookshelf
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,21 +13,13 @@ import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.lyhux.yuedunovel.R
-import com.lyhux.yuedunovel.data.BaseRecord
 import com.lyhux.yuedunovel.data.db.BookshelfBean
-import com.lyhux.yuedunovel.data.db.BookshelfDao
-import com.lyhux.yuedunovel.data.http.ApiResponse
-import com.lyhux.yuedunovel.data.http.BookDetailBean
 import com.lyhux.yuedunovel.data.repository.BookshelfRepository
-import com.lyhux.yuedunovel.koin.Injector
 import com.lyhux.yuedunovel.ui.NestFragmentActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
-import org.koin.android.ext.android.inject
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,12 +42,26 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment, NestFragment
     private  lateinit var gridView: GridView
     private var mAdapter: BookListAdapter? = null
 
+    private lateinit var localReceiver: LocalReceiver
+    private lateinit var localBroadcastManager: LocalBroadcastManager
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        localBroadcastManager = LocalBroadcastManager.getInstance(context); // 获取实例
+
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("com.lyhux.yuedu.MyReceiver")
+        localReceiver = LocalReceiver()
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter)
     }
 
     override fun onCreateView(
@@ -61,6 +71,18 @@ class BookFragment: Fragment(), BookshelfFragment.EditableFragment, NestFragment
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_bookshelf_book, container, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        localBroadcastManager.unregisterReceiver(localReceiver)
+    }
+
+    inner class LocalReceiver: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            this@BookFragment.addAdapter()
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,8 +1,8 @@
 package com.lyhux.yuedunovel.ui.book
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.lyhux.yuedunovel.R
 import com.lyhux.yuedunovel.data.db.BookshelfBean
 import org.koin.android.ext.android.inject
 import java.util.*
+
 
 private const val BOOK_ID = "book_id"
 
@@ -99,6 +101,8 @@ class BookFragment : Fragment() {
         bookViewModel.bookshelfLiveData.observe(this, Observer {
             if (it == null && bookshelfBean != null) {
                 bookViewModel.addBookshelf(bookshelfBean!!)
+                val intent = Intent("com.lyhux.yuedu.MyReceiver");
+                requireActivity().sendBroadcast(intent)
             }
             addBookshelfView.text = "已加入书架"
             addBookshelfView.isClickable = false
